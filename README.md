@@ -1,15 +1,24 @@
 This component is inspired from the meeting selector from [doctolib](https://www.doctolib.fr/medecin-generaliste/paris) with the power of Vuejs components.
 
 # vue-meeting-selector
+- [github](https://github.com/IneoO/vue-meeting-selector)
+- [site](https://vue-meeting-selector.tuturu.io)
+
 
 ## Dependencies
-- required: Vuejs >= 2.x
+- required: Vuejs >= 2.6.x
 
 ## Install
-1. `npm install vue-meeting-selector --save` or `yarn add vue-meeting-selector`
-2. Include the file in your app
-  `import VueMeetingSelector from 'vue-meeting-selector';`
-  `import 'vue-meeting-selector/dist/lib/vue-meeting-selector.min.css';`
+```bash
+npm install vue-meeting-selector --save
+yarn add vue-meeting-selector
+```
+
+Include the file in your app
+```javascript
+import VueMeetingSelector from 'vue-meeting-selector';  
+import 'vue-meeting-selector/dist/lib/vue-meeting-selector.min.css';
+```
 
 ## Contributing
 Issues and PR's are much appreciated.
@@ -217,14 +226,24 @@ To change the display of loading
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development component
 ```
-npm run serve
+npm run dev
 ```
 
-### Compiles and minifies for production
+### Compiles and hot-reloads for development doc
 ```
-npm run build
+npm run dev
+```
+
+### Compiles and minifies for production the lib
+```
+npm run build:lib
+```
+
+### Compiles and minifies for production the doc
+```
+npm run build:doc
 ```
 
 ### Run your unit tests
