@@ -14,14 +14,14 @@
       </div>
       <div class="nav-right">
         <div class="nav-item text-center">
-          <a href="#">
+          <a href="https://github.com/IneoO/vue-meeting-selector" target="_blank">
             <span class="icon">
               <font-awesome-icon :icon="['fab', 'github']" />
             </span>
           </a>
         </div>
         <div class="nav-item text-center">
-          <a href="#">
+          <a href="https://www.npmjs.com/package/vue-meeting-selector" target="_blank">
             <span class="icon">
               <font-awesome-icon :icon="['fab', 'npm']" />
             </span>
