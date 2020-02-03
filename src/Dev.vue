@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import VueMeetingSelector from './components/VueMeetingSelector.vue';
+import VueMeetingSelector from './components/MeetingSelector/VueMeetingSelector.vue';
 import slotsGenerator from '@/helpers/slotsGenerator';
 import Time from '@/interfaces/Time.interface';
 import MeetingsDay from '@/interfaces/MeetingsDay.interface';
@@ -48,7 +48,7 @@ import MeetingSlot from '@/interfaces/MeetingSlot.interface';
     VueMeetingSelector,
   },
 })
-export default class App extends Vue {
+export default class Dev extends Vue {
   meeting: MeetingSlot | null = null;
 
   meetingsDays: MeetingsDay[] = [];
@@ -152,6 +152,6 @@ html, body, {
   box-sizing: border-box;
 }
 .meeting-selector {
-  // width: 542px;
+  width: 542px;
 }
 </style>

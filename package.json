@@ -1,20 +1,35 @@
 {
   "name": "vue-meeting-selector",
   "version": "0.1.0",
-  "private": true,
+  "author": "Valère Pique <pique.valere@gmx.fr>",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "meeting-selector",
+    "schedule-selector",
+    "selector",
+    "web-components"
+  ],
+  "main": "dist/lib/vue-meeting-selector.common.js",
+  "private": false,
+  "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "dev": "vue-cli-service serve src/dev.ts",
+    "doc": "vue-cli-service serve src/doc.ts",
+    "build:lib": "vue-cli-service build --target lib --dest dist/lib --name vue-meeting-selector src/components/MeetingSelector/VueMeetingSelector.vue",
+    "build:doc": "vue-cli-service build --dest dist/doc",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.4.4",
-    "vue": "^2.6.10",
-    "vue-class-component": "^7.0.2",
-    "vue-property-decorator": "^8.3.0"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-brands-svg-icons": "^5.12.0",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/vue-fontawesome": "^0.1.9",
+    "@types/highlight.js": "^9.12.3",
     "@types/jest": "^24.0.19",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
@@ -24,11 +39,22 @@
     "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
+    "cirrus-ui": "^0.5.5",
+    "core-js": "^3.4.4",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "highlight.js": "^9.18.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
     "typescript": "~3.5.3",
-    "vue-template-compiler": "^2.6.10"
+    "vue-class-component": "^7.0.2",
+    "vue-highlight.js": "^3.1.0",
+    "vue-property-decorator": "^8.3.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuex": "^3.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IneoO/vue-meeting-selector.git"
   }
 }

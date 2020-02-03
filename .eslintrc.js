@@ -9,6 +9,11 @@ module.exports = {
     '@vue/typescript',
   ],
   rules: {
+    'import/no-extraneous-dependencies': 0,
+    'class-methods-use-this': 0,
+    'import/no-named-as-default': 0,
+    'no-shadow': ['error', {'allow': ['state'] }],
+    'no-unused-expressions': ['error', {'allowTernary': true }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
