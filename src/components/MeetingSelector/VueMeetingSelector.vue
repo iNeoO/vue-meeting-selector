@@ -15,7 +15,7 @@
           class="tab__pagination__button"
           :class="cssClass.tabPaginationPreviousButton"
           @click="previousDate">
-          <component :is="arrowComponent" direction="left"/>
+          <arrow-icon direction="left"/>
         </button>
       </div>
       <div class="tab__days">
@@ -28,7 +28,7 @@
             v-if="$scopedSlots.header"
             name="header"
             :meetings="meetingsByDay" />
-          <component :is="dayDisplayComponent"
+          <day-display
             v-else
             class="tab__days__day-display"
             :class="cssClass.tabDayDisplay"
@@ -63,7 +63,7 @@
             <div
               v-else
               class="tab__loading__text">
-              <component :is="loaderComponent" />
+              <loader />
               {{ options.loadingLabel }}
             </div>
         </div>
@@ -80,7 +80,7 @@
           :disabled="loading"
           :class="cssClass.tabPaginationNextButton"
           @click="nextDate">
-          <component :is="arrowComponent" direction="right"/>
+          <arrow-icon direction="right"/>
         </button>
         <slot
           v-if="$scopedSlots['button-up']"
@@ -92,7 +92,7 @@
           :disabled="skip === 0 || loading"
           @click="previousMeetings"
           class="tab__pagination__button tab__pagination__button--up">
-          <component :is="arrowComponent" direction="up"/>
+          <arrow-icon direction="up"/>
         </button>
         <slot
           v-if="$scopedSlots['button-down']"
@@ -104,7 +104,7 @@
           :disabled="(skip + options.limit >= maxNbMeetings) || loading"
           @click="nextMeetings"
           class="tab__pagination__button tab__pagination__button--down">
-          <component :is="arrowComponent" direction="down"/>
+          <arrow-icon direction="down"/>
         </button>
       </div>
     </div>
@@ -130,6 +130,9 @@ import CalendarOptions from '@/interfaces/CalendarOptions.interface';
 import ClassNames from '@/interfaces/ClassNames.interface';
 
 import Meetings from '@/components/MeetingSelector/Meetings.vue';
+import DayDisplay from '@/components/MeetingSelector/DayDisplay.vue';
+import ArrowIcon from '@/components/MeetingSelector/ArrowIcon.vue';
+import Loader from '@/components/MeetingSelector/Loader.vue';
 
 import defaultCalendarOptions from '@/defaults/calendarOptions';
 import defaultClassNames from '@/defaults/classNames';
@@ -139,6 +142,9 @@ import defaultClassNames from '@/defaults/classNames';
   name: 'VueMeetingSelector',
   components: {
     Meetings,
+    DayDisplay,
+    ArrowIcon,
+    Loader,
   },
 })
 export default class VueMeetingSelector extends Vue {
@@ -161,18 +167,6 @@ export default class VueMeetingSelector extends Vue {
 
   @Prop({ default: false })
   readonly loading!: boolean;
-
-  get dayDisplayComponent() {
-    return () => import('./DayDisplay.vue');
-  }
-
-  get arrowComponent() {
-    return () => import('./ArrowIcon.vue');
-  }
-
-  get loaderComponent() {
-    return () => import('./Loader.vue');
-  }
 
   get days(): string[] {
     const { daysLabel } = this.options;

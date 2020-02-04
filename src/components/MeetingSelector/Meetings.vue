@@ -9,8 +9,7 @@
         :meeting="slot" />
       </div>
     </template>
-    <component
-      :is="meetingDisplayComponent"
+    <meeting-display
       v-else
       v-for="(slot, index) in meetingsDay.slots"
       :class="meetingClass"
@@ -34,8 +33,13 @@ import {
 import MeetingsDay from '@/interfaces/MeetingsDay.interface';
 import MeetingSlot from '@/interfaces/MeetingSlot.interface';
 
+import MeetingDisplay from '@/components/MeetingSelector/MeetingDisplay.vue';
+
 @Component({
   name: 'meetings',
+  components: {
+    MeetingDisplay,
+  },
 })
 export default class DayDisplay extends Vue {
   @Prop({ default: () => [] })
@@ -52,10 +56,6 @@ export default class DayDisplay extends Vue {
 
   @Prop({ default: '' })
   readonly meetingEmptyClass!: string;
-
-  get meetingDisplayComponent() {
-    return () => import('./MeetingDisplay.vue');
-  }
 
   meetingSlotClick(meetingSlot: MeetingsDay): void {
     this.$emit('meeting-slot-click', meetingSlot);

@@ -1,6 +1,6 @@
 {
   "name": "vue-meeting-selector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Valère Pique <pique.valere@gmx.fr>",
   "keywords": [
     "vue",
@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "vue-cli-service serve src/dev.ts",
     "doc": "vue-cli-service serve src/doc.ts",
-    "build:lib": "vue-cli-service build --target lib --dest dist/lib --name vue-meeting-selector src/components/MeetingSelector/VueMeetingSelector.vue",
+    "build:lib": "vue-cli-service build --target lib --dest dist/lib --name vue-meeting-selector src/lib.ts",
     "build:doc": "vue-cli-service build src/doc.ts --dest dist/doc",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
