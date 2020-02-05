@@ -17,6 +17,7 @@
 import {
   Component,
   Vue,
+  Watch,
 } from 'vue-property-decorator';
 import TheMenu from '@/components/Layout/TheMenu.vue';
 
@@ -48,6 +49,24 @@ export default class TheBurgerMenu extends Vue {
 
   hideMenu():void {
     this.$store.dispatch('actionsStore/hideBurgerMenu');
+  }
+
+  resize():void {
+    if (this.isBurgerMenuDisplayed && window.innerWidth > 769) {
+      this.hideMenu();
+    }
+  }
+
+  created():void {
+    window.addEventListener('resize', this.resize);
+    this.$on('hook:beforeDestroy', ():void => {
+      window.removeEventListener('resize', this.resize);
+    });
+  }
+
+  @Watch('isBurgerMenuDisplayed')
+  onIsBurgerMenuDisplayedChanged(isBurgerMenuDisplayed: boolean):void {
+    document.body.style.overflow = isBurgerMenuDisplayed ? 'hidden' : 'auto';
   }
 }
 </script>
