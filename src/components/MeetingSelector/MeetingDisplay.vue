@@ -56,7 +56,7 @@ export default class MeetingsDisplay extends Vue {
   }
 
   get isMeetingSelected(): boolean {
-    if (this.meetingSlotSelected.date) {
+    if (this.meetingSlotSelected && this.meetingSlotSelected.date) {
       const meetingSelectedDate = new Date(this.meetingSlotSelected.date);
       const meetingDate = new Date(this.meetingSlot.date);
       return meetingSelectedDate.getTime() === meetingDate.getTime();
