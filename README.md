@@ -16,8 +16,7 @@ yarn add vue-meeting-selector
 
 Include the file in your app
 ```javascript
-import VueMeetingSelector from 'vue-meeting-selector';  
-import 'vue-meeting-selector/dist/lib/vue-meeting-selector.min.css';
+import VueMeetingSelector from 'vue-meeting-selector';
 ```
 
 ## Contributing
@@ -39,8 +38,7 @@ When you create a new PR please make it against the develop branch when adding n
 </template>
 
 <script>
-importt VueMeetingSelector from 'vueMeetingSelector';
-import vue-meeting-selector/dist/lib/vue-meeting-selector.min.css;
+import VueMeetingSelector from 'vueMeetingSelector';
 
 export default {
   components: {

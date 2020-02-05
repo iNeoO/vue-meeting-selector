@@ -74,8 +74,7 @@ const code: string = `
 </template>
 
 <script>
-import VueMeetingSelector from '@/components/MeetingSelector/VueMeetingSelector.vue';
-import 'vue-meeting-selector/dist/lib/vue-meeting-selector.min.css'
+import VueMeetingSelector from 'vue-meeting-selector';
 
 export default {
   name: 'SlotsExample',

@@ -41,7 +41,6 @@ export default class Instalation extends Vue {
   get imports():string {
     return `
       import VueMeetingSelector from 'vue-meeting-selector';
-      import 'vue-multi-selector/dist/lib/vue-multi-selector.css';
     `;
   }
 }

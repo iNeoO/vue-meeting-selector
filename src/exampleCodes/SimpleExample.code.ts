@@ -17,7 +17,6 @@ const code: string = `
 
 <script>
 import VueMeetingSelector from 'vue-meeting-selector';
-import 'vue-meeting-selector/dist/lib/vue-meeting-selector.min.css'
 
 export default {
   name: 'SimpleExample',
