@@ -42,7 +42,7 @@ import MeetingDisplay from '@/components/MeetingSelector/MeetingDisplay.vue';
   },
 })
 export default class DayDisplay extends Vue {
-  @Prop({ default: () => [] })
+  @Prop({ required: true })
   readonly meetingsDay!: MeetingsDay;
 
   @Prop({ default: () => ({}) })

@@ -29,7 +29,7 @@ import MeetingSlot from '@/interfaces/MeetingSlot.interface';
 
 @Component
 export default class MeetingsDisplay extends Vue {
-  @Prop({ default: () => ({}) })
+  @Prop({ required: true })
   readonly meetingSlot!: MeetingSlot;
 
   @Prop({ default: () => ({}) })

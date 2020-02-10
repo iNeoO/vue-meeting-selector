@@ -3,15 +3,9 @@ import MeetingDisplay from '@/components/MeetingSelector/MeetingDisplay.vue';
 import MeetingSlot from '@/interfaces/MeetingSlot.interface';
 
 describe('MeetingDisplay.vue', () => {
-  it('meetingSlot', () => {
-    const wrapper = shallowMount(MeetingDisplay, {
-      propsData: {},
-    });
-    expect(wrapper.props().meetingSlot).toMatchObject({});
-  });
   describe('props', () => {
     it('meetingButtonClass', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: new Date(),
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -24,7 +18,7 @@ describe('MeetingDisplay.vue', () => {
     });
 
     it('meetingEmptyClass', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: '',
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -39,8 +33,8 @@ describe('MeetingDisplay.vue', () => {
 
   describe('computed', () => {
     it('time < 10', () => {
-      const date:Date = new Date('2020-02-02:02:02');
-      const meetingSlot:MeetingSlot = {
+      const date: Date = new Date('2020-02-02:02:02');
+      const meetingSlot: MeetingSlot = {
         date,
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -53,21 +47,21 @@ describe('MeetingDisplay.vue', () => {
     });
 
     it('time > 10', () => {
-      const date:Date = new Date('2020-02-02:20:20');
-      const meetingSlot:MeetingSlot = {
+      const date: Date = new Date('2020-02-02:20:20');
+      const meetingSlot: MeetingSlot = {
         date,
       };
       const wrapper = shallowMount(MeetingDisplay, {
         propsData: { meetingSlot },
       });
-      const hours:string = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
-      const minutes:string = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
-      const time:string = `${hours}:${minutes}`;
+      const hours: string = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+      const minutes: string = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+      const time: string = `${hours}:${minutes}`;
       expect((wrapper.vm as any).time).toBe(time);
     });
 
     it('isMeetingSelected, true', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: new Date(),
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -80,7 +74,7 @@ describe('MeetingDisplay.vue', () => {
     });
 
     it('isMeetingSelected no meeting selected, false', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: new Date(),
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -90,11 +84,23 @@ describe('MeetingDisplay.vue', () => {
       });
       expect((wrapper.vm as any).isMeetingSelected).toBe(false);
     });
+    it('isMeetingSelected no meeting null, false', () => {
+      const meetingSlot: MeetingSlot = {
+        date: new Date(),
+      };
+      const wrapper = shallowMount(MeetingDisplay, {
+        propsData: {
+          meetingSlot,
+          meetingSlotSelected: null,
+        },
+      });
+      expect((wrapper.vm as any).isMeetingSelected).toBe(false);
+    });
   });
 
   describe('events', () => {
     it('calls meetingSlotClick when click on meeting', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: new Date(),
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -102,13 +108,13 @@ describe('MeetingDisplay.vue', () => {
       });
       const stub = jest.fn();
       wrapper.setMethods({ meetingSlotClick: stub });
-      const el = wrapper.find('.meeting__button').trigger('click');
+      wrapper.find('.meeting__button').trigger('click');
       expect((wrapper.vm as any).meetingSlotClick).toBeCalled();
     });
 
     it('emit meeting-slot-click', () => {
-      const date = new Date();
-      const meetingSlot:MeetingSlot = {
+      const date: Date = new Date();
+      const meetingSlot: MeetingSlot = {
         date,
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -118,13 +124,13 @@ describe('MeetingDisplay.vue', () => {
       wrapper.vm.$on('meeting-slot-click', stub);
       (wrapper.vm as any).meetingSlotClick();
 
-      expect(stub).toBeCalledWith({ date });
+      expect(stub).toBeCalledWith(meetingSlot);
     });
   });
 
   describe('class displayed', () => {
     it('render .empty__date, date = \'\'', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: '',
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -134,7 +140,7 @@ describe('MeetingDisplay.vue', () => {
     });
 
     it('!render .empty__date, date = new Date()', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: new Date(),
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -144,7 +150,7 @@ describe('MeetingDisplay.vue', () => {
     });
 
     it('render .meeting__button--selected, date = new Date()', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: new Date(),
       };
       const wrapper = shallowMount(MeetingDisplay, {
@@ -157,10 +163,10 @@ describe('MeetingDisplay.vue', () => {
     });
 
     it('!render .meeting__button--selected, date = new Date(1)', () => {
-      const meetingSlot:MeetingSlot = {
+      const meetingSlot: MeetingSlot = {
         date: new Date(),
       };
-      const meetingSlotSelected:MeetingSlot = {
+      const meetingSlotSelected: MeetingSlot = {
         date: new Date(1),
       };
       const wrapper = shallowMount(MeetingDisplay, {

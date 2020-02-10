@@ -5,7 +5,7 @@
       class="meeting-selector"
       v-model="meeting"
       :date="date"
-      :loading="true"
+      :loading="false"
       :meetings-days="meetingsDays"
       @next-date="nextDate"
       @previous-date="previousDate">
