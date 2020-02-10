@@ -41,6 +41,7 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "cirrus-ui": "^0.5.5",
     "core-js": "^3.4.4",
+    "coveralls": "^3.0.9",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "highlight.js": "^9.18.0",
