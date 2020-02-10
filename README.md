@@ -1,5 +1,8 @@
 This component is inspired from the meeting selector from [doctolib](https://www.doctolib.fr/medecin-generaliste/paris) with the power of Vuejs components.
 
+[![Build status](https://travis-ci.org/IneoO/vue-meeting-selector.svg?branch=master)](https://travis-ci.org/IneoO/vue-meeting-selector)
+[![Coverage Status](https://coveralls.io/repos/github/IneoO/vue-meeting-selector/badge.svg?branch=master)](https://coveralls.io/github/IneoO/vue-meeting-selector?branch=master)
+
 # vue-meeting-selector
 - [github](https://github.com/IneoO/vue-meeting-selector)
 - [site](https://vue-meeting-selector.tuturu.io)
