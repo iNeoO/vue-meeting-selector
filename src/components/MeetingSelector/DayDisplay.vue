@@ -16,16 +16,16 @@ import MeetingsDay from '@/interfaces/MeetingsDay.interface';
 
 @Component
 export default class DayDisplay extends Vue {
-  @Prop({ default: () => [] })
+  @Prop({ required: true })
   readonly meetingsDay!: MeetingsDay;
 
-  @Prop({ default: () => [] })
-  readonly daysLabel!: String[];
+  @Prop({ required: true })
+  readonly daysLabel!: string[];
 
-  @Prop({ default: () => [] })
-  readonly monthsLabel!: String[];
+  @Prop({ required: true })
+  readonly monthsLabel!: string[];
 
-  get title() {
+  get title(): string {
     const date = new Date(this.meetingsDay.date);
     return this.daysLabel[date.getDay()];
   }

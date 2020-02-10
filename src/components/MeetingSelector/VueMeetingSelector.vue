@@ -156,7 +156,7 @@ export default class VueMeetingSelector extends Vue {
   @PropSync('date', { type: Date })
   syncedDate!: Date
 
-  @Prop({ default: () => [] })
+  @Prop({ required: true })
   readonly meetingsDays!: MeetingsDay[];
 
   @Prop({ default: () => ({}) })
