@@ -6,4 +6,4 @@ describe('Loader.vue', () => {
     const wrapper = shallowMount(Loader);
     expect(wrapper.findAll('.icon-loader').exists()).toBe(true);
   });
-})
+});
