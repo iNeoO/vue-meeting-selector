@@ -234,7 +234,7 @@ npm run dev
 
 ### Compiles and hot-reloads for development doc
 ```
-npm run dev
+npm run doc
 ```
 
 ### Compiles and minifies for production the lib
