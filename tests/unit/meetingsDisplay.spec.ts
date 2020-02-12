@@ -43,7 +43,7 @@ describe('MeetingDisplay.vue', () => {
       const hours:string = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
       const minutes:string = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
       const time:string = `${hours}:${minutes}`;
-      expect((wrapper.vm as any).time).toBe(time);
+      expect((wrapper.vm as Vue & { time: () => string }).time).toBe(time);
     });
 
     it('time > 10', () => {
@@ -57,7 +57,7 @@ describe('MeetingDisplay.vue', () => {
       const hours: string = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
       const minutes: string = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
       const time: string = `${hours}:${minutes}`;
-      expect((wrapper.vm as any).time).toBe(time);
+      expect((wrapper.vm as Vue & { time: () => string }).time).toBe(time);
     });
 
     it('isMeetingSelected, true', () => {
@@ -70,7 +70,8 @@ describe('MeetingDisplay.vue', () => {
           meetingSlotSelected: meetingSlot,
         },
       });
-      expect((wrapper.vm as any).isMeetingSelected).toBe(true);
+      expect((wrapper.vm as Vue & { isMeetingSelected: () => boolean })
+        .isMeetingSelected).toBe(true);
     });
 
     it('isMeetingSelected no meeting selected, false', () => {
@@ -82,7 +83,8 @@ describe('MeetingDisplay.vue', () => {
           meetingSlot,
         },
       });
-      expect((wrapper.vm as any).isMeetingSelected).toBe(false);
+      expect((wrapper.vm as Vue & { isMeetingSelected: () => boolean })
+        .isMeetingSelected).toBe(false);
     });
     it('isMeetingSelected no meeting null, false', () => {
       const meetingSlot: MeetingSlot = {
@@ -94,7 +96,8 @@ describe('MeetingDisplay.vue', () => {
           meetingSlotSelected: null,
         },
       });
-      expect((wrapper.vm as any).isMeetingSelected).toBe(false);
+      expect((wrapper.vm as Vue & { isMeetingSelected: () => boolean })
+        .isMeetingSelected).toBe(false);
     });
   });
 
@@ -109,7 +112,8 @@ describe('MeetingDisplay.vue', () => {
       const stub = jest.fn();
       wrapper.setMethods({ meetingSlotClick: stub });
       wrapper.find('.meeting__button').trigger('click');
-      expect((wrapper.vm as any).meetingSlotClick).toBeCalled();
+      expect((wrapper.vm as Vue & { meetingSlotClick: () => void })
+        .meetingSlotClick).toBeCalled();
     });
 
     it('emit meeting-slot-click', () => {
@@ -122,7 +126,7 @@ describe('MeetingDisplay.vue', () => {
       });
       const stub = jest.fn();
       wrapper.vm.$on('meeting-slot-click', stub);
-      (wrapper.vm as any).meetingSlotClick();
+      (wrapper.vm as Vue & { meetingSlotClick: () => void }).meetingSlotClick();
 
       expect(stub).toBeCalledWith(meetingSlot);
     });

@@ -5,6 +5,7 @@ import MeetingsDay from '@/interfaces/MeetingsDay.interface';
 import MeetingSlot from '@/interfaces/MeetingSlot.interface';
 import calendarOptions from '@/defaults/calendarOptions';
 import classNames from '@/defaults/classNames';
+import ClassNames from '@/interfaces/ClassNames.interface';
 
 describe('VueMeetingSelector.vue', () => {
   describe('props', () => {
@@ -36,7 +37,8 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      expect((wrapper.vm as any).days).toEqual(['saturday', 'sunday']);
+      expect((wrapper.vm as Vue & { days: string[] })
+        .days).toEqual(['saturday', 'sunday']);
     });
     it('maxNbMeetings', () => {
       const meetingsDays: MeetingsDay[] = (():MeetingsDay[] => {
@@ -63,10 +65,11 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      expect((wrapper.vm as any).maxNbMeetings).toEqual(1);
+      expect((wrapper.vm as Vue & { maxNbMeetings: number })
+        .maxNbMeetings).toEqual(1);
     });
     it('maxNbMeetings, empty', () => {
-      const meetingsDays: MeetingsDay[] = []
+      const meetingsDays: MeetingsDay[] = [];
       const wrapper = shallowMount(VueMeetingSelector, {
         propsData: {
           meetingsDays,
@@ -74,7 +77,8 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      expect((wrapper.vm as any).maxNbMeetings).toEqual(0);
+      expect((wrapper.vm as Vue & { maxNbMeetings: number })
+        .maxNbMeetings).toEqual(0);
     });
     it('meetingsByDays', () => {
       const meetingsDays: MeetingsDay[] = (():MeetingsDay[] => {
@@ -101,7 +105,8 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      expect((wrapper.vm as any).maxNbMeetings).toEqual(1);
+      expect((wrapper.vm as Vue & { maxNbMeetings: number })
+        .maxNbMeetings).toEqual(1);
     });
     it('meetingsByDays', () => {
       const meetingsDays: MeetingsDay[] = (():MeetingsDay[] => {
@@ -129,9 +134,10 @@ describe('VueMeetingSelector.vue', () => {
         },
       });
       const emptyDate: MeetingSlot = {
-        date: ''
-      }
-      expect((wrapper.vm as any).meetingsByDays).toEqual([
+        date: '',
+      };
+      expect((wrapper.vm as Vue & { meetingsByDays: MeetingsDay[] })
+        .meetingsByDays).toEqual([
         {
           date: new Date('2020-02-01:10:00'),
           slots: [
@@ -152,7 +158,7 @@ describe('VueMeetingSelector.vue', () => {
             emptyDate,
             emptyDate,
           ],
-        }
+        },
       ]);
     });
     it('cssClass', () => {
@@ -180,7 +186,8 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      expect((wrapper.vm as any).cssClass).toEqual(classNames);
+      expect((wrapper.vm as Vue & { cssClass: ClassNames })
+        .cssClass).toEqual(classNames);
     });
   });
   describe('events', () => {
@@ -211,8 +218,8 @@ describe('VueMeetingSelector.vue', () => {
       });
       const stub = jest.fn();
       wrapper.vm.$on('change', stub);
-      (wrapper.vm as any).meetingSlotClick(slot1);
-
+      (wrapper.vm as Vue & { meetingSlotClick: (slot: MeetingSlot) => void })
+        .meetingSlotClick(slot1);
       expect(stub).toBeCalledWith({
         date: new Date('2020-02-01:10:00'),
       });
@@ -244,9 +251,10 @@ describe('VueMeetingSelector.vue', () => {
       });
       const stub = jest.fn();
       wrapper.vm.$on('change', stub);
-      (wrapper.vm as any).meetingSlotClick({
-        date: new Date('2020-02-01:10:00'),
-      });
+      (wrapper.vm as Vue & { meetingSlotClick: (slot: MeetingSlot) => void })
+        .meetingSlotClick({
+          date: new Date('2020-02-01:10:00'),
+        });
 
       expect(stub).toBeCalled();
     });
@@ -277,9 +285,10 @@ describe('VueMeetingSelector.vue', () => {
       });
       const stub = jest.fn();
       wrapper.vm.$on('change', stub);
-      (wrapper.vm as any).meetingSlotClick({
-        date: new Date('2020-02-02:10:00'),
-      });
+      (wrapper.vm as Vue & { meetingSlotClick: (slot: MeetingSlot) => void })
+        .meetingSlotClick({
+          date: new Date('2020-02-02:10:00'),
+        });
 
       expect(stub).toBeCalled();
     });
@@ -308,8 +317,8 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      (wrapper.vm as any).nextMeetings();
-      expect((wrapper.vm as any).skip).toEqual(4);
+      (wrapper.vm as Vue & { nextMeetings: () => void }).nextMeetings();
+      expect((wrapper.vm as Vue & { skip: number }).skip).toEqual(4);
     });
     it('previousMeetings', () => {
       const meetingsDays: MeetingsDay[] = (():MeetingsDay[] => {
@@ -336,9 +345,9 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      (wrapper.vm as any).nextMeetings();
-      (wrapper.vm as any).previousMeetings();
-      expect((wrapper.vm as any).skip).toEqual(0);
+      (wrapper.vm as Vue & { nextMeetings: () => void }).nextMeetings();
+      (wrapper.vm as Vue & { previousMeetings: () => void }).previousMeetings();
+      expect((wrapper.vm as Vue & { skip: number }).skip).toEqual(0);
     });
     it('previousDate', () => {
       const meetingsDays: MeetingsDay[] = (():MeetingsDay[] => {
@@ -367,7 +376,7 @@ describe('VueMeetingSelector.vue', () => {
       });
       const stub = jest.fn();
       wrapper.vm.$on('previous-date', stub);
-      (wrapper.vm as any).previousDate();
+      (wrapper.vm as Vue & { previousDate: () => void }).previousDate();
       expect(stub).toBeCalled();
     });
     it('nextDate', () => {
@@ -397,7 +406,7 @@ describe('VueMeetingSelector.vue', () => {
       });
       const stub = jest.fn();
       wrapper.vm.$on('next-date', stub);
-      (wrapper.vm as any).nextDate();
+      (wrapper.vm as Vue & { nextDate: () => void }).nextDate();
       expect(stub).toBeCalled();
     });
   });
@@ -427,9 +436,9 @@ describe('VueMeetingSelector.vue', () => {
           date: new Date('2020-02-01:10:00'),
         },
       });
-      (wrapper.vm as any).nextMeetings();
+      (wrapper.vm as Vue & { nextMeetings: () => void }).nextMeetings();
       wrapper.setProps({ date: new Date('2020-02-02:10:00') });
-      expect((wrapper.vm as any).skip).toEqual(0);
+      expect((wrapper.vm as Vue & { skip: number }).skip).toEqual(0);
     });
   });
 });
