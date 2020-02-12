@@ -43,7 +43,7 @@ describe('MeetingDisplay.vue', () => {
       const hours:string = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
       const minutes:string = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
       const time:string = `${hours}:${minutes}`;
-      expect((wrapper.vm as Vue & { time: () => string }).time).toBe(time);
+      expect((wrapper.vm as Vue & { time: string }).time).toBe(time);
     });
 
     it('time > 10', () => {
@@ -57,7 +57,7 @@ describe('MeetingDisplay.vue', () => {
       const hours: string = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
       const minutes: string = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
       const time: string = `${hours}:${minutes}`;
-      expect((wrapper.vm as Vue & { time: () => string }).time).toBe(time);
+      expect((wrapper.vm as Vue & { time: string }).time).toBe(time);
     });
 
     it('isMeetingSelected, true', () => {
@@ -70,7 +70,7 @@ describe('MeetingDisplay.vue', () => {
           meetingSlotSelected: meetingSlot,
         },
       });
-      expect((wrapper.vm as Vue & { isMeetingSelected: () => boolean })
+      expect((wrapper.vm as Vue & { isMeetingSelected: boolean })
         .isMeetingSelected).toBe(true);
     });
 
@@ -83,7 +83,7 @@ describe('MeetingDisplay.vue', () => {
           meetingSlot,
         },
       });
-      expect((wrapper.vm as Vue & { isMeetingSelected: () => boolean })
+      expect((wrapper.vm as Vue & { isMeetingSelected: boolean })
         .isMeetingSelected).toBe(false);
     });
     it('isMeetingSelected no meeting null, false', () => {
@@ -96,7 +96,7 @@ describe('MeetingDisplay.vue', () => {
           meetingSlotSelected: null,
         },
       });
-      expect((wrapper.vm as Vue & { isMeetingSelected: () => boolean })
+      expect((wrapper.vm as Vue & { isMeetingSelected: boolean })
         .isMeetingSelected).toBe(false);
     });
   });

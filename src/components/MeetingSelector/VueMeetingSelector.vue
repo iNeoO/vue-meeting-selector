@@ -148,7 +148,7 @@ import defaultClassNames from '@/defaults/classNames';
   },
 })
 export default class VueMeetingSelector extends Vue {
-  private skip = 0
+  skip = 0
 
   @Model('change', { type: Object })
   meetingSlot!: MeetingSlot | undefined
@@ -233,7 +233,7 @@ export default class VueMeetingSelector extends Vue {
     this.$emit('next-date');
   }
 
-  meetingSlotClick(meetingSlot: MeetingsDay): void {
+  meetingSlotClick(meetingSlot: MeetingSlot): void {
     if (this.meetingSlot) {
       const selectedDate = new Date(meetingSlot.date);
       const date = new Date(this.meetingSlot.date);
