@@ -57,7 +57,7 @@ export default class DayDisplay extends Vue {
   @Prop({ default: '' })
   readonly meetingEmptyClass!: string;
 
-  meetingSlotClick(meetingSlot: MeetingsDay): void {
+  meetingSlotClick(meetingSlot: MeetingSlot): void {
     this.$emit('meeting-slot-click', meetingSlot);
   }
 }
