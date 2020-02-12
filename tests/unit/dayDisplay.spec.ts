@@ -21,7 +21,7 @@ describe('DayDisplay.vue', () => {
           monthsLabel: calendarOptions.monthsLabel,
         },
       });
-      expect((wrapper.vm as any).title).toBe('wednesday');
+      expect((wrapper.vm as Vue & { title: string }).title).toBe('wednesday');
     });
     it('subtitle', () => {
       const date: Date = new Date('2020-01-01');
@@ -36,7 +36,7 @@ describe('DayDisplay.vue', () => {
           monthsLabel: calendarOptions.monthsLabel,
         },
       });
-      expect((wrapper.vm as any).subtitle).toBe(
+      expect((wrapper.vm as Vue & { subtitle: string }).subtitle).toBe(
         '1 jan.',
       );
     });

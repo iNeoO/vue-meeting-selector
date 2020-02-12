@@ -138,7 +138,7 @@ export default class Dev extends Vue {
 </script>
 
 <style lang="scss">
-html, body, {
+html, body {
   margin: 0;
   width: 100%;
   height: 100%;

@@ -23,7 +23,8 @@ describe('Meetings.vue', () => {
           meetingClass: '',
         },
       });
-      expect((wrapper.vm as any).meetingsDay).toMatchObject(meetingsDay);
+      expect((wrapper.vm as Vue & { meetingsDay: MeetingsDay }).meetingsDay)
+        .toMatchObject(meetingsDay);
     });
     it('meetingSlotSelected', () => {
       const date: Date = new Date('2020-01-01');
@@ -43,7 +44,8 @@ describe('Meetings.vue', () => {
           meetingClass: '',
         },
       });
-      expect((wrapper.vm as any).meetingSlotSelected).toMatchObject(meetingSlotSelected);
+      expect((wrapper.vm as Vue & { meetingSlotSelected: MeetingSlot })
+        .meetingSlotSelected).toMatchObject(meetingSlotSelected);
     });
     it('meetingSlotSelected, undefined', () => {
       const date: Date = new Date('2020-01-01');
@@ -59,7 +61,8 @@ describe('Meetings.vue', () => {
           meetingClass: '',
         },
       });
-      expect((wrapper.vm as any).meetingSlotSelected).toMatchObject({});
+      expect((wrapper.vm as Vue & { meetingSlotSelected: MeetingSlot })
+        .meetingSlotSelected).toMatchObject({});
     });
   });
 
@@ -81,7 +84,8 @@ describe('Meetings.vue', () => {
       });
       const stub = jest.fn();
       wrapper.vm.$on('meeting-slot-click', stub);
-      (wrapper.vm as any).meetingSlotClick(meetingSlotSelected);
+      (wrapper.vm as Vue & { meetingSlotClick: (meetingSlotSelected: MeetingSlot) => void })
+        .meetingSlotClick(meetingSlotSelected);
       expect(stub).toBeCalledWith({ date });
     });
   });
