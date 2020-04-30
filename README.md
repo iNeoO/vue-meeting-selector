@@ -34,7 +34,7 @@ When you create a new PR please make it against the develop branch when adding n
   <vue-meeting-selector
     v-model="meeting"
     :date="date"
-    loading="loading"
+    :loading="loading"
     :meetings-days="meetingsDays"
     @next-date="nextDate"
     @previous-date="previousDate" />
@@ -55,7 +55,7 @@ export default {
       meetingsDays: [],
     };
   },
-  methods {
+  methods: {
     getMeetings(date) {
       // methods who return the meetings
     },
