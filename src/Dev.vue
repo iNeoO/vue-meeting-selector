@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import VueMeetingSelector from './components/MeetingSelector/VueMeetingSelector.vue';
+import VueMeetingSelector from '@/components/MeetingSelector/VueMeetingSelector.vue';
 import slotsGenerator from '@/helpers/slotsGenerator';
 import Time from '@/interfaces/Time.interface';
 import MeetingsDay from '@/interfaces/MeetingsDay.interface';
