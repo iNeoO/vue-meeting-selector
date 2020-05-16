@@ -1,5 +1,5 @@
 <template>
-  <i class="icon" :class="iconDirectionClass" />
+  <i class="vms-icon" :class="iconDirectionClass" />
 </template>
 
 <script lang="ts">
@@ -12,13 +12,13 @@ export default class DayDisplay extends Vue {
   readonly direction!: string;
 
   get iconDirectionClass() {
-    return `icon-${this.direction}`;
+    return `vms-icon-${this.direction}`;
   }
 }
 </script>
 
 <style scoped lang="scss">
-.icon {
+.vms-icon {
   font-size: 25px;
 }
 </style>

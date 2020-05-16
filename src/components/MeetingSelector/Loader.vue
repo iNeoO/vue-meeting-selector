@@ -1,5 +1,5 @@
 <template>
-  <i class="icon-loader" />
+  <i class="vms-icon-loader" />
 </template>
 
 <script lang="ts">
@@ -15,7 +15,7 @@ export default class VueMeetingSelector extends Vue {}
 </script>
 
 <style scoped lang="scss">
-.icon-loader::before {
+.vms-icon-loader::before {
   animation: spin 1s linear infinite;
 }
 @keyframes spin {

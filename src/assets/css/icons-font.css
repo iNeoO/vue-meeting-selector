@@ -9,7 +9,7 @@
     font-weight: normal;
     font-style: normal;
 }
-[class*='icon-']:before{
+[class*='vms-icon-']:before{
 	display: inline-block;
    font-family: 'icons font';
    font-style: normal;
@@ -18,8 +18,8 @@
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale
 }
-.icon-left:before{content:'\0041';}
-.icon-right:before{content:'\0042';}
-.icon-up:before{content:'\0043';}
-.icon-down:before{content:'\0044';}
-.icon-loader:before{content:'\0045';}
+.vms-icon-left:before{content:'\0041';}
+.vms-icon-right:before{content:'\0042';}
+.vms-icon-up:before{content:'\0043';}
+.vms-icon-down:before{content:'\0044';}
+.vms-icon-loader:before{content:'\0045';}
