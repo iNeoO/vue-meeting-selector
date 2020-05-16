@@ -9,13 +9,13 @@ describe('ArrowIcon.vue', () => {
           direction: 'left',
         },
       });
-      expect(wrapper.find('.icon-left').exists()).toBe(true);
+      expect(wrapper.find('.vms-icon-left').exists()).toBe(true);
     });
     it('render icon, default', () => {
       const wrapper = shallowMount(ArrowIcon, {
         propsData: {},
       });
-      expect(wrapper.find('.icon-right').exists()).toBe(true);
+      expect(wrapper.find('.vms-icon-right').exists()).toBe(true);
     });
   });
 });
