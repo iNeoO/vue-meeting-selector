@@ -11,6 +11,7 @@
           name="button-previous" />
         <button
           v-else
+          type="button"
           :disabled="options.disabledDate(date) || loading"
           class="tab__pagination__button"
           :class="cssClass.tabPaginationPreviousButton"
@@ -76,6 +77,7 @@
           name="button-next" />
         <button
           v-else
+          type="button"
           class="tab__pagination__button tab__pagination__button--right"
           :disabled="loading"
           :class="cssClass.tabPaginationNextButton"
@@ -88,6 +90,7 @@
           :is-disabled="skip === 0 || loading" />
         <button
           v-else
+          type="button"
           :class="cssClass.tabPaginationUpButton"
           :disabled="skip === 0 || loading"
           @click="previousMeetings"
@@ -100,6 +103,7 @@
           :is-disabled="(skip + options.limit >= maxNbMeetings) || loading" />
         <button
           v-else
+          type="button"
           :class="cssClass.tabPaginationDownButton"
           :disabled="(skip + options.limit >= maxNbMeetings) || loading"
           @click="nextMeetings"
