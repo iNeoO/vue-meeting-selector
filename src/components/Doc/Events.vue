@@ -14,7 +14,7 @@
       <tbody>
         <tr>
           <td>meeting-slot-selected</td>
-          <td>Object (MeetingSlot)</td>
+          <td>Object (MeetingSlot) | MeetingSlot[] (if multi)</td>
         </tr>
         <tr>
           <td>meeting-slot-unselected</td>
@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <td>change</td>
-          <td>Object (MeetingSlot)</td>
+          <td>Object (MeetingSlot) | MeetingSlot[] (if multi)</td>
         </tr>
         <tr>
           <td>next-date</td>

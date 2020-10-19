@@ -14,6 +14,7 @@ module.exports = {
     'import/no-named-as-default': 0,
     'no-shadow': ['error', { allow: ['state'] }],
     'no-unused-expressions': ['error', { allowTernary: true }],
+    'no-restricted-syntax': ['error', 'ForInStatement'],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },

@@ -14,7 +14,7 @@
       <tbody>
         <tr>
           <td>v-model</td>
-          <td>Object (MeetingSlot)</td>
+          <td>Object (MeetingSlot) | MeetingSlot[] (if multi)</td>
         </tr>
         <tr>
           <td>date</td>
@@ -34,6 +34,10 @@
         </tr>
         <tr>
           <td>loading</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>multi</td>
           <td>boolean</td>
         </tr>
       </tbody>

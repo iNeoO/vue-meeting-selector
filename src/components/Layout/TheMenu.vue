@@ -63,6 +63,9 @@ export default class TheMenu extends Vue {
         name: 'Simple example',
         href: '#simpleexample',
       }, {
+        name: 'Simple multi example',
+        href: '#simplemultiexample',
+      }, {
         name: 'Slots and ScopedSlots',
         href: '#slotsexample',
       }],

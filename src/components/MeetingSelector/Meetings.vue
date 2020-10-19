@@ -46,7 +46,7 @@ export default class DayDisplay extends Vue {
   readonly meetingsDay!: MeetingsDay;
 
   @Prop({ default: () => ({}) })
-  readonly meetingSlotSelected!: MeetingSlot;
+  readonly meetingSlotSelected!: MeetingSlot[] | MeetingSlot
 
   @Prop({ default: '' })
   readonly meetingClass!: string;
