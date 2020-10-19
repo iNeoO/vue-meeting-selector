@@ -141,7 +141,6 @@ import Loader from '@/components/MeetingSelector/Loader.vue';
 import defaultCalendarOptions from '@/defaults/calendarOptions';
 import defaultClassNames from '@/defaults/classNames';
 
-
 @Component({
   name: 'VueMeetingSelector',
   components: {
@@ -154,8 +153,8 @@ import defaultClassNames from '@/defaults/classNames';
 export default class VueMeetingSelector extends Vue {
   skip = 0
 
-  @Model('change', { type: Object })
-  meetingSlot!: MeetingSlot | undefined
+  @Model('change', { type: [Array, Object] })
+  meetingSlot!: any
 
   @PropSync('date', { type: Date })
   syncedDate!: Date
@@ -171,6 +170,9 @@ export default class VueMeetingSelector extends Vue {
 
   @Prop({ default: false })
   readonly loading!: boolean;
+
+  @Prop({ default: false })
+  readonly multi!: boolean;
 
   get days(): string[] {
     const { daysLabel } = this.options;
@@ -238,7 +240,25 @@ export default class VueMeetingSelector extends Vue {
   }
 
   meetingSlotClick(meetingSlot: MeetingSlot): void {
-    if (this.meetingSlot) {
+    if (this.multi && Array.isArray(this.meetingSlot)) {
+      const selectedDate:number = new Date(meetingSlot.date).getTime();
+      const index:number = this.meetingSlot.findIndex((s: MeetingSlot) => {
+        const date = new Date(s.date);
+        return date.getTime() === selectedDate;
+      });
+      const slots = [...this.meetingSlot];
+      if (index !== -1) {
+        slots.splice(index, 1);
+        this.$emit('change', slots);
+        this.$emit('meeting-slot-selected', slots);
+      } else {
+        slots.push(meetingSlot);
+        this.$emit('change', slots);
+        this.$emit('meeting-slot-selected', slots);
+      }
+      return;
+    }
+    if (this.meetingSlot && this.meetingSlot as MeetingSlot) {
       const selectedDate = new Date(meetingSlot.date);
       const date = new Date(this.meetingSlot.date);
       if (date.getTime() === selectedDate.getTime()) {

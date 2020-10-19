@@ -32,8 +32,8 @@ export default class MeetingsDisplay extends Vue {
   @Prop({ required: true })
   readonly meetingSlot!: MeetingSlot;
 
-  @Prop({ default: () => ({}) })
-  readonly meetingSlotSelected!: MeetingSlot;
+  @Prop({ default: null })
+  readonly meetingSlotSelected!: MeetingSlot[] | MeetingSlot;
 
   @Prop({ default: '' })
   readonly meetingButtonClass!: string;
@@ -56,6 +56,16 @@ export default class MeetingsDisplay extends Vue {
   }
 
   get isMeetingSelected(): boolean {
+    if (Array.isArray(this.meetingSlotSelected)) {
+      const date:number = new Date(this.meetingSlot.date).getTime();
+      for (const slot of this.meetingSlotSelected) {
+        const d = new Date(slot.date);
+        if (d.getTime() === date) {
+          return true;
+        }
+      }
+      return false;
+    }
     if (this.meetingSlotSelected && this.meetingSlotSelected.date) {
       const meetingSelectedDate = new Date(this.meetingSlotSelected.date);
       const meetingDate = new Date(this.meetingSlot.date);
