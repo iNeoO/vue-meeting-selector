@@ -8,6 +8,7 @@
       <events />
       <slots-and-scoped-slots />
       <simple-example-wrapper />
+      <simple-multi-example-wrapper />
       <slots-example-wrapper />
     </the-layout>
   </div>
@@ -27,6 +28,7 @@ import Props from '@/components/Doc/Props.vue';
 import SlotsAndScopedSlots from '@/components/Doc/SlotsAndScopedSlots.vue';
 
 import SimpleExampleWrapper from '@/components/Examples/SimpleExampleWrapper.vue';
+import SimpleMultiExampleWrapper from '@/components/Examples/SimpleMultiExampleWrapper.vue';
 import SlotsExampleWrapper from '@/components/Examples/SlotsExampleWrapper.vue';
 
 @Component({
@@ -39,6 +41,7 @@ import SlotsExampleWrapper from '@/components/Examples/SlotsExampleWrapper.vue';
     Props,
     SlotsAndScopedSlots,
     SimpleExampleWrapper,
+    SimpleMultiExampleWrapper,
     SlotsExampleWrapper,
   },
 })

@@ -125,24 +125,25 @@ interface CalendarOptions {
 
 ### Props
 
-| Params          | Type           |
-| --------------- | -------------- |
-| v-model         | MeetingSlot    |
-| date            | Date \| string |
-| meetingsDays    | MeetingsDays[] |
-| calendarOptions | Object         |
-| classNames      | Object         |
-| loading         | boolean        |
+| Params          | Type                           |
+| --------------- | ------------------------------ |
+| v-model         | MeetingSlot \| MeetingSlot[]   |
+| date            | Date \| string                 |
+| meetingsDays    | MeetingsDays[]                 |
+| calendarOptions | Object                         |
+| classNames      | Object                         |
+| multi           | boolean                        |
+| loading         | boolean                        |
 
 ### Events
 
 | Name                    | Params         |
-| ----------------------- | -------------- |
-| meeting-slot-selected   | MeetingSlot    |
-| meeting-slot-unselected | -              |
-| change                  | MeetingSlot    |
-| next-date               | -              |
-| previous-date           | -              |
+| ----------------------- | ------------------------------ |
+| meeting-slot-selected   | MeetingSlot \| MeetingSlot[]   |
+| meeting-slot-unselected | -                              |
+| change                  | MeetingSlot                    |
+| next-date               | -                              |
+| previous-date           | -                              |
 
 ### Slots/ScopedSlots available
 

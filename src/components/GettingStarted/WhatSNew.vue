@@ -6,6 +6,10 @@
     </h3>
     <ul>
       <li>
+        <h6>1.1.0</h6>
+        <p>Set possible to have multi meetings selected</p>
+      </li>
+      <li>
         <h6>1.0.0</h6>
         <p>First release !!</p>
       </li>
