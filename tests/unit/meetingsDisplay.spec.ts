@@ -176,6 +176,39 @@ describe('MeetingDisplay.vue', () => {
       const wrapper = shallowMount(MeetingDisplay, {
         propsData: {
           meetingSlot,
+          meetingSlotSelected,
+        },
+      });
+      expect(wrapper.find('.meeting__button--selected').exists()).toBe(false);
+    });
+
+    it('render .meeting__button--selected, date = new Date() multi', () => {
+      const meetingSlot: MeetingSlot = {
+        date: new Date(),
+      };
+      const meetingSlotSelected: MeetingSlot[] = [{
+        date: new Date(),
+      }];
+      const wrapper = shallowMount(MeetingDisplay, {
+        propsData: {
+          meetingSlot,
+          meetingSlotSelected,
+        },
+      });
+      expect(wrapper.find('.meeting__button--selected').exists()).toBe(true);
+    });
+
+    it('!render .meeting__button--selected, date = new Date(1) multi', () => {
+      const meetingSlot: MeetingSlot = {
+        date: new Date(),
+      };
+      const meetingSlotSelected: MeetingSlot[] = [{
+        date: new Date(1),
+      }];
+      const wrapper = shallowMount(MeetingDisplay, {
+        propsData: {
+          meetingSlot,
+          meetingSlotSelected,
         },
       });
       expect(wrapper.find('.meeting__button--selected').exists()).toBe(false);

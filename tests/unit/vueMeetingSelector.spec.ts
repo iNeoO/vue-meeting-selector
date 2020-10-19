@@ -224,6 +224,40 @@ describe('VueMeetingSelector.vue', () => {
         date: new Date('2020-02-01:10:00'),
       });
     });
+    it('meetingSlotClick, no selected multi', () => {
+      const slot1: MeetingSlot = {
+        date: new Date('2020-02-01:10:00'),
+      };
+      const meetingsDays: MeetingsDay[] = (():MeetingsDay[] => {
+        const meetingDay1: MeetingsDay = {
+          date: new Date('2020-02-01:10:00'),
+          slots: [slot1],
+        };
+        const slot2: MeetingSlot = {
+          date: new Date('2020-02-02:10:00'),
+        };
+        const meetingDay2: MeetingsDay = {
+          date: new Date('2020-02-02:10:00'),
+          slots: [slot2],
+        };
+        return [meetingDay1, meetingDay2];
+      })();
+      const wrapper = shallowMount(VueMeetingSelector, {
+        propsData: {
+          meetingsDays,
+          meetingSlot: [],
+          multi: true,
+          date: new Date('2020-02-01:10:00'),
+        },
+      });
+      const stub = jest.fn();
+      wrapper.vm.$on('change', stub);
+      (wrapper.vm as Vue & { meetingSlotClick: (slot: MeetingSlot) => void })
+        .meetingSlotClick(slot1);
+      expect(stub).toBeCalledWith([{
+        date: new Date('2020-02-01:10:00'),
+      }]);
+    });
     it('meetingSlotClick, already same slot selected', () => {
       const slot1: MeetingSlot = {
         date: new Date('2020-02-01:10:00'),
@@ -246,6 +280,41 @@ describe('VueMeetingSelector.vue', () => {
         propsData: {
           meetingsDays,
           meetingSlot: slot1,
+          date: new Date('2020-02-01:10:00'),
+        },
+      });
+      const stub = jest.fn();
+      wrapper.vm.$on('change', stub);
+      (wrapper.vm as Vue & { meetingSlotClick: (slot: MeetingSlot) => void })
+        .meetingSlotClick({
+          date: new Date('2020-02-01:10:00'),
+        });
+
+      expect(stub).toBeCalled();
+    });
+    it('meetingSlotClick, already same slot selected multi', () => {
+      const slot1: MeetingSlot = {
+        date: new Date('2020-02-01:10:00'),
+      };
+      const meetingsDays: MeetingsDay[] = (():MeetingsDay[] => {
+        const meetingDay1: MeetingsDay = {
+          date: new Date('2020-02-01:10:00'),
+          slots: [slot1],
+        };
+        const slot2: MeetingSlot = {
+          date: new Date('2020-02-02:10:00'),
+        };
+        const meetingDay2: MeetingsDay = {
+          date: new Date('2020-02-02:10:00'),
+          slots: [slot2],
+        };
+        return [meetingDay1, meetingDay2];
+      })();
+      const wrapper = shallowMount(VueMeetingSelector, {
+        propsData: {
+          meetingsDays,
+          meetingSlot: [slot1],
+          multi: true,
           date: new Date('2020-02-01:10:00'),
         },
       });
