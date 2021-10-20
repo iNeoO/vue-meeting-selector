@@ -6,18 +6,16 @@
       <div
         class="tab__pagination"
         :class="cssClass.tabPaginationPrevious">
-        <slot
-          v-if="$slots['button-previous']"
-          name="button-previous" />
-        <button
-          v-else
-          type="button"
-          :disabled="options.disabledDate(date) || loading"
-          class="tab__pagination__button"
-          :class="cssClass.tabPaginationPreviousButton"
-          @click="previousDate">
-          <arrow-icon direction="left"/>
-        </button>
+        <slot name="button-previous">
+          <button
+            type="button"
+            :disabled="options.disabledDate(date) || loading"
+            class="tab__pagination__button"
+            :class="cssClass.tabPaginationPreviousButton"
+            @click="previousDate">
+            <arrow-icon direction="left"/>
+          </button>
+        </slot>
       </div>
       <div class="tab__days">
         <div
@@ -26,17 +24,16 @@
           v-for="(meetingsByDay, index) in meetingsByDays"
           :key="String(meetingsByDay.date)">
           <slot
-            v-if="$scopedSlots.header"
             name="header"
-            :meetings="meetingsByDay" />
-          <day-display
-            v-else
-            class="tab__days__day-display"
-            :class="cssClass.tabDayDisplay"
-            :meetings-day="meetingsByDay"
-            :months-label="options.monthsLabel"
-            :days-label="options.daysLabel"
-          />
+            :meetings="meetingsByDay">
+            <day-display
+              class="tab__days__day-display"
+              :class="cssClass.tabDayDisplay"
+              :meetings-day="meetingsByDay"
+              :months-label="options.monthsLabel"
+              :days-label="options.daysLabel"
+            />
+          </slot>
           <meetings
             class="tab__days__meetings"
             :class="cssClass.tabMeetings"
@@ -59,57 +56,53 @@
           class="tab__loading"
           :class="cssClass.tabLoading">
           <slot
-            v-if="$slots['loading']"
-            name="loading" />
+            name="loading">
             <div
-              v-else
               class="tab__loading__text">
               <loader />
               {{ options.loadingLabel }}
             </div>
+          </slot>
         </div>
       </div>
       <div
         class="tab__pagination"
         :class="cssClass.tabPaginationNext">
         <slot
-          v-if="$slots['button-next']"
-          name="button-next" />
-        <button
-          v-else
-          type="button"
-          class="tab__pagination__button tab__pagination__button--right"
-          :disabled="loading"
-          :class="cssClass.tabPaginationNextButton"
-          @click="nextDate">
-          <arrow-icon direction="right"/>
-        </button>
+          name="button-next">
+          <button
+            type="button"
+            class="tab__pagination__button tab__pagination__button--right"
+            :disabled="loading"
+            :class="cssClass.tabPaginationNextButton"
+            @click="nextDate">
+            <arrow-icon direction="right"/>
+          </button>
+        </slot>
         <slot
-          v-if="$scopedSlots['button-up']"
           name="button-up"
-          :is-disabled="skip === 0 || loading" />
-        <button
-          v-else
-          type="button"
-          :class="cssClass.tabPaginationUpButton"
-          :disabled="skip === 0 || loading"
-          @click="previousMeetings"
-          class="tab__pagination__button tab__pagination__button--up">
-          <arrow-icon direction="up"/>
-        </button>
+          :is-disabled="skip === 0 || loading">
+          <button
+            type="button"
+            :class="cssClass.tabPaginationUpButton"
+            :disabled="skip === 0 || loading"
+            @click="previousMeetings"
+            class="tab__pagination__button tab__pagination__button--up">
+            <arrow-icon direction="up"/>
+          </button>
+        </slot>
         <slot
-          v-if="$scopedSlots['button-down']"
           name="button-down"
-          :is-disabled="(skip + options.limit >= maxNbMeetings) || loading" />
-        <button
-          v-else
-          type="button"
-          :class="cssClass.tabPaginationDownButton"
-          :disabled="(skip + options.limit >= maxNbMeetings) || loading"
-          @click="nextMeetings"
-          class="tab__pagination__button tab__pagination__button--down">
-          <arrow-icon direction="down"/>
-        </button>
+          :is-disabled="(skip + options.limit >= maxNbMeetings) || loading">
+          <button
+            type="button"
+            :class="cssClass.tabPaginationDownButton"
+            :disabled="(skip + options.limit >= maxNbMeetings) || loading"
+            @click="nextMeetings"
+            class="tab__pagination__button tab__pagination__button--down">
+            <arrow-icon direction="down"/>
+          </button>
+        </slot>
       </div>
     </div>
   </div>
