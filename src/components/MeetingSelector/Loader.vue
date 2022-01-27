@@ -3,15 +3,11 @@
 </template>
 
 <script lang="ts">
-import {
-  Component,
-  Vue,
-} from 'vue-property-decorator';
+import { defineComponent } from 'vue';
 
-@Component({
-  name: 'Loader',
-})
-export default class VueMeetingSelector extends Vue {}
+export default defineComponent({
+  name: 'loader',
+});
 </script>
 
 <style scoped lang="scss">

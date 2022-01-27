@@ -1,10 +1,10 @@
 import ClassNames from '@/interfaces/ClassNames.interface';
 
-const defaultClassNames = {
+const defaultClassNames: ClassNames = {
   tabClass: '',
-  tabPaginationleft: '',
+  tabPaginationPrevious: '',
   tabPaginationPreviousButton: '',
-  tabPaginationRight: '',
+  tabPaginationNext: '',
   tabPaginationNextButton: '',
   tabPaginationUpButton: '',
   tabPaginationDownButton: '',

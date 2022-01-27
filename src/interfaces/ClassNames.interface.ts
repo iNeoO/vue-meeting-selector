@@ -1,8 +1,8 @@
 interface ClassNames {
   tabClass?: string,
-  tabPaginationleft?: string,
+  tabPaginationPrevious?: string,
   tabPaginationPreviousButton?: string,
-  tabPaginationRight?: string,
+  tabPaginationNext?: string,
   tabPaginationNextButton?: string,
   tabPaginationUpButton?: string,
   tabPaginationDownButton?: string,

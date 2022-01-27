@@ -4,22 +4,19 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:vue/essential',
+    'plugin:vue/vue3-essential',
     '@vue/airbnb',
-    '@vue/typescript',
+    '@vue/typescript/recommended',
   ],
+  parserOptions: {
+    ecmaVersion: 2020,
+  },
   rules: {
     'import/no-extraneous-dependencies': 0,
-    'class-methods-use-this': 0,
-    'import/no-named-as-default': 0,
     'no-shadow': ['error', { allow: ['state'] }],
-    'no-unused-expressions': ['error', { allowTernary: true }],
     'no-restricted-syntax': ['error', 'ForInStatement'],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-  },
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
   overrides: [
     {

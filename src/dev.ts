@@ -1,8 +1,7 @@
-import Vue from 'vue';
-import Dev from './Dev.vue';
+import { createApp } from 'vue';
 
-Vue.config.productionTip = false;
+import Dev from '@/Dev.vue';
 
-new Vue({
-  render: h => h(Dev),
-}).$mount('#app');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const app = createApp(Dev)
+  .mount('#app');

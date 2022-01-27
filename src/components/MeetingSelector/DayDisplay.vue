@@ -10,31 +10,42 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
+import { defineComponent, PropType, computed } from 'vue';
 import MeetingsDay from '@/interfaces/MeetingsDay.interface';
 
-@Component
-export default class DayDisplay extends Vue {
-  @Prop({ required: true })
-  readonly meetingsDay!: MeetingsDay;
+export default defineComponent({
+  name: 'dayDisplay',
+  props: {
+    meetingsDay: {
+      type: Object as PropType<MeetingsDay>,
+      required: true,
+    },
+    daysLabel: {
+      type: Array,
+      required: true,
+    },
+    monthsLabel: {
+      type: Array,
+      required: true,
+    },
+  },
+  setup(props) {
+    const title = computed(() => {
+      const date = new Date(props.meetingsDay.date);
+      return props.daysLabel[date.getDay()];
+    });
 
-  @Prop({ required: true })
-  readonly daysLabel!: string[];
+    const subtitle = computed(() => {
+      const date = new Date(props.meetingsDay.date);
+      return `${date.getDate()} ${props.monthsLabel[date.getMonth()]}`;
+    });
 
-  @Prop({ required: true })
-  readonly monthsLabel!: string[];
-
-  get title(): string {
-    const date = new Date(this.meetingsDay.date);
-    return this.daysLabel[date.getDay()];
-  }
-
-  get subtitle(): string {
-    const date = new Date(this.meetingsDay.date);
-    return `${date.getDate()} ${this.monthsLabel[date.getMonth()]}`;
-  }
-}
+    return {
+      title,
+      subtitle,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">

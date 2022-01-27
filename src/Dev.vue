@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <vue-meeting-selector
-       ref="meetingSelector"
+      ref="meetingSelector"
       class="meeting-selector"
       v-model="meeting"
       :date="date"
@@ -12,129 +12,148 @@
       <!-- <template
         #header="{ meetings }">
         <div>{{ meetings.date }}</div>
-      </template> -->
-      <!-- <template #button-up="{ isDisabled }">
+      </template>
+      <template #button-up="{ isDisabled }">
         <button
           :disabled="isDisabled"
           @click="up">
           up</button>
-      </template> -->
-      <!-- <template
+      </template>
+      <template
         #button-down="{ isDisabled }">
         <button
           :disabled="isDisabled"
           @click="down"
           >down</button>
-      </template> -->
-      <!-- <template
+      </template>
+      <template
         #meeting="{ meeting }">
         <div>{{ meeting.date }}</div>
       </template> -->
-      </vue-meeting-selector>
+    </vue-meeting-selector>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import {
+  defineComponent,
+  ref,
+  Ref,
+} from 'vue';
 import VueMeetingSelector from '@/components/MeetingSelector/VueMeetingSelector.vue';
 import slotsGenerator from '@/helpers/slotsGenerator';
-import Time from '@/interfaces/Time.interface';
 import MeetingsDay from '@/interfaces/MeetingsDay.interface';
 import MeetingSlot from '@/interfaces/MeetingSlot.interface';
+import Time from '@/interfaces/Time.interface';
 
-
-@Component({
+export default defineComponent({
   components: {
     VueMeetingSelector,
   },
-})
-export default class Dev extends Vue {
-  meeting: MeetingSlot | null = null;
+  setup() {
+    const meeting: Ref<null | MeetingSlot> = ref(null);
+    const meetingsDays: Ref<MeetingsDay[]> = ref([]);
+    const nbDaysToDisplay = ref(5);
+    const date = ref(new Date());
 
-  meetingsDays: MeetingsDay[] = [];
-
-  date = new Date();
-
-  nbDaysToDisplay = 5;
-
-  up(): void {
-    (this.$refs.meetingSelector as Vue & { previousMeetings: () => void }).previousMeetings();
-  }
-
-  down(): void {
-    (this.$refs.meetingSelector as Vue & { nextMeetings: () => void }).nextMeetings();
-  }
-
-  nextDate(): void {
-    const start: Time = {
-      hours: 8,
-      minutes: 0,
+    const initMeetingsDays = () => {
+      const start: Time = {
+        hours: 8,
+        minutes: 0,
+      };
+      const end: Time = {
+        hours: 16,
+        minutes: 0,
+      };
+      meetingsDays.value = slotsGenerator(
+        new Date(),
+        nbDaysToDisplay.value,
+        start,
+        end,
+        30,
+      );
     };
-    const end: Time = {
-      hours: 16,
-      minutes: 0,
-    };
-    const date = new Date(this.date);
-    const newDate = new Date(date.setDate(date.getDate() + 7));
-    this.date = newDate;
-    this.meetingsDays = slotsGenerator(
-      newDate,
-      5,
-      start,
-      end,
-      30,
-    );
-  }
 
-  previousDate(): void {
-    const start: Time = {
-      hours: 8,
-      minutes: 0,
-    };
-    const end: Time = {
-      hours: 16,
-      minutes: 0,
-    };
-    const date = new Date(this.date);
-    date.setDate(date.getDate() - 7);
-    const formatingDate = (dateToFormat: Date | string):string => {
-      const d = new Date(dateToFormat);
-      const day = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
-      const month = d.getMonth() + 1 < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1;
-      const year = d.getFullYear();
-      return `${year}-${month}-${day}`;
-    };
-    const newDate = formatingDate(new Date()) >= formatingDate(date)
-      ? new Date()
-      : new Date(date);
-    this.date = newDate;
-    this.meetingsDays = slotsGenerator(
-      newDate,
-      this.nbDaysToDisplay,
-      start,
-      end,
-      30,
-    );
-  }
+    initMeetingsDays();
 
-  created(): void {
-    const start: Time = {
-      hours: 8,
-      minutes: 0,
+    const meetingSelector:Ref<unknown> = ref(null);
+
+    const up = (): void => {
+      (
+        meetingSelector.value as { previousMeetings: () => void }
+      ).previousMeetings();
     };
-    const end: Time = {
-      hours: 16,
-      minutes: 0,
+
+    const down = (): void => {
+      (
+        meetingSelector.value as { nextMeetings: () => void }
+      ).nextMeetings();
     };
-    this.meetingsDays = slotsGenerator(
-      new Date(),
-      this.nbDaysToDisplay,
-      start,
-      end,
-      30,
-    );
-  }
-}
+
+    const nextDate = (): void => {
+      const start: Time = {
+        hours: 8,
+        minutes: 0,
+      };
+      const end: Time = {
+        hours: 16,
+        minutes: 0,
+      };
+      const d = new Date(date.value as Date);
+      const newDate = new Date(d.setDate(d.getDate() + 7));
+      date.value = newDate;
+      meetingsDays.value = slotsGenerator(
+        newDate,
+        nbDaysToDisplay.value,
+        start,
+        end,
+        30,
+      );
+    };
+
+    const previousDate = (): void => {
+      const start: Time = {
+        hours: 8,
+        minutes: 0,
+      };
+      const end: Time = {
+        hours: 16,
+        minutes: 0,
+      };
+      const d = new Date(date.value as Date);
+      d.setDate(d.getDate() - 7);
+      const formatingDate = (dateToFormat: Date | string):string => {
+        const dateParsed = new Date(dateToFormat);
+        const day = dateParsed.getDate() < 10 ? `0${dateParsed.getDate()}` : dateParsed.getDate();
+        const month = dateParsed.getMonth() + 1 < 10 ? `0${dateParsed.getMonth() + 1}` : dateParsed.getMonth() + 1;
+        const year = dateParsed.getFullYear();
+        return `${year}-${month}-${day}`;
+      };
+      const newDate = formatingDate(new Date()) >= formatingDate(d)
+        ? new Date()
+        : new Date(d);
+      date.value = newDate;
+      meetingsDays.value = slotsGenerator(
+        newDate,
+        nbDaysToDisplay.value,
+        start,
+        end,
+        30,
+      );
+    };
+
+    return {
+      meeting,
+      meetingsDays,
+      date,
+      meetingSelector,
+      up,
+      down,
+      nextDate,
+      previousDate,
+    };
+  },
+});
 </script>
 
 <style lang="scss">

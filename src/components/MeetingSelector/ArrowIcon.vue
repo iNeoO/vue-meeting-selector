@@ -3,18 +3,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { defineComponent, computed } from 'vue';
 
+export default defineComponent({
+  name: 'arrowIcon',
+  props: {
+    direction: {
+      type: String,
+      default: 'right',
+    },
+  },
+  setup(props) {
+    const iconDirectionClass = computed(() => `vms-icon-${props.direction}`);
 
-@Component
-export default class DayDisplay extends Vue {
-  @Prop({ default: 'right' })
-  readonly direction!: string;
-
-  get iconDirectionClass() {
-    return `vms-icon-${this.direction}`;
-  }
-}
+    return {
+      iconDirectionClass,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">

@@ -1,6 +1,6 @@
 <template>
   <div class="meetings">
-    <template v-if="$scopedSlots.meeting">
+    <template v-if="$slots.meeting">
       <div
         v-for="(slot, index) in meetingsDay.slots"
         :key="index">
@@ -23,44 +23,49 @@
 </template>
 
 <script lang="ts">
-import {
-  Component,
-  Prop,
-  Emit,
-  Vue,
-} from 'vue-property-decorator';
+import { defineComponent, PropType } from 'vue';
 
 import MeetingsDay from '@/interfaces/MeetingsDay.interface';
 import MeetingSlot from '@/interfaces/MeetingSlot.interface';
 
 import MeetingDisplay from '@/components/MeetingSelector/MeetingDisplay.vue';
 
-@Component({
+export default defineComponent({
   name: 'meetings',
   components: {
     MeetingDisplay,
   },
-})
-export default class DayDisplay extends Vue {
-  @Prop({ required: true })
-  readonly meetingsDay!: MeetingsDay;
-
-  @Prop({ default: () => ({}) })
-  readonly meetingSlotSelected!: MeetingSlot[] | MeetingSlot
-
-  @Prop({ default: '' })
-  readonly meetingClass!: string;
-
-  @Prop({ default: '' })
-  readonly meetingButtonClass!: string;
-
-  @Prop({ default: '' })
-  readonly meetingEmptyClass!: string;
-
-  meetingSlotClick(meetingSlot: MeetingSlot): void {
-    this.$emit('meeting-slot-click', meetingSlot);
-  }
-}
+  props: {
+    meetingsDay: {
+      type: Object as PropType<MeetingsDay>,
+      default: null,
+    },
+    meetingSlotSelected: {
+      type: [Array, Object],
+    },
+    meetingClass: {
+      type: String,
+      default: '',
+    },
+    meetingButtonClass: {
+      type: String,
+      default: '',
+    },
+    meetingEmptyClass: {
+      type: String,
+      default: '',
+    },
+  },
+  emits: ['meeting-slot-click'],
+  setup(props, context) {
+    const meetingSlotClick = (meetingSlot: MeetingSlot): void => {
+      context.emit('meeting-slot-click', meetingSlot);
+    };
+    return {
+      meetingSlotClick,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">

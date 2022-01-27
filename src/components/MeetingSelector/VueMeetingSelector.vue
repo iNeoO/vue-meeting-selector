@@ -6,7 +6,8 @@
       <div
         class="tab__pagination"
         :class="cssClass.tabPaginationPrevious">
-        <slot name="button-previous">
+        <slot
+          name="button-previous">
           <button
             type="button"
             :disabled="options.disabledDate(date) || loading"
@@ -41,9 +42,9 @@
             :meeting-button-class="cssClass.tabMeetingButton"
             :meeting-empty-class="cssClass.tabMeetingEmpty"
             :meetings-day="meetingsByDay"
-            :meeting-slot-selected="meetingSlot"
+            :meeting-slot-selected="modelValue"
             @meeting-slot-click="meetingSlotClick">
-            <template #meeting="{ meeting }" v-if="$scopedSlots.meeting">
+            <template #meeting="{ meeting }" v-if="$slots.meeting">
               <slot
                 name="meeting"
                 :meeting="meeting">
@@ -56,13 +57,14 @@
           class="tab__loading"
           :class="cssClass.tabLoading">
           <slot
-            name="loading">
+            v-if="$slots['loading']"
+            name="loading" />
             <div
+              v-else
               class="tab__loading__text">
               <loader />
               {{ options.loadingLabel }}
             </div>
-          </slot>
         </div>
       </div>
       <div
@@ -109,15 +111,12 @@
 </template>
 
 <script lang="ts">
-
 import {
-  Component,
-  Model,
-  Prop,
-  PropSync,
-  Vue,
-  Watch,
-} from 'vue-property-decorator';
+  defineComponent,
+  PropType,
+  computed,
+  ref,
+} from 'vue';
 
 import '@/assets/css/icons-font.css';
 
@@ -134,141 +133,170 @@ import Loader from '@/components/MeetingSelector/Loader.vue';
 import defaultCalendarOptions from '@/defaults/calendarOptions';
 import defaultClassNames from '@/defaults/classNames';
 
-@Component({
-  name: 'VueMeetingSelector',
+export default defineComponent({
+  name: 'meetingSelector',
   components: {
     Meetings,
     DayDisplay,
     ArrowIcon,
     Loader,
   },
-})
-export default class VueMeetingSelector extends Vue {
-  skip = 0
+  props: {
+    modelValue: {
+      required: true,
+    },
+    date: {
+      type: Date,
+    },
+    meetingsDays: {
+      type: Array as () => Array<MeetingsDay>,
+      requied: true,
+    },
+    calendarOptions: {
+      type: Object as PropType<CalendarOptions>,
+      default: () => ({}),
+    },
+    classNames: {
+      type: Object as PropType<ClassNames>,
+      default: () => ({}),
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    multi: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: [
+    'previous-date',
+    'next-date',
+    'meeting-slot-selected',
+    'change',
+    'meeting-slot-unselected',
+    'update:modelValue',
+  ],
+  setup(props, context) {
+    const skip = ref(0);
 
-  @Model('change', { type: [Array, Object] })
-  meetingSlot!: any
-
-  @PropSync('date', { type: Date })
-  syncedDate!: Date
-
-  @Prop({ required: true })
-  readonly meetingsDays!: MeetingsDay[];
-
-  @Prop({ default: () => ({}) })
-  readonly calendarOptions!: CalendarOptions;
-
-  @Prop({ default: () => ({}) })
-  readonly classNames!: ClassNames;
-
-  @Prop({ default: false })
-  readonly loading!: boolean;
-
-  @Prop({ default: false })
-  readonly multi!: boolean;
-
-  get days(): string[] {
-    const { daysLabel } = this.options;
-    return this.meetingsDays.map((meetingsDay) => {
-      const date = new Date(meetingsDay.date);
-      return daysLabel[date.getDay()];
-    });
-  }
-
-  get maxNbMeetings(): number {
-    if (this.meetingsDays.length) {
-      return Math.max(...this.meetingsDays.map(meetingsDay => meetingsDay.slots.length));
-    }
-    return 0;
-  }
-
-  get meetingsByDays(): MeetingsDay[] {
-    const arrayIndex = Math.ceil(this.maxNbMeetings / this.options.limit)
-      * this.options.limit;
-    return this.meetingsDays.map((meetingsDay) => {
-      const slots = new Array(arrayIndex).fill({ date: '' });
-      slots.splice(0, meetingsDay.slots.length, ...meetingsDay.slots);
-      const day = {
-        ...meetingsDay,
-        slots: slots.slice(this.skip, this.skip + this.options.limit),
-      };
-      return day;
-    });
-  }
-
-  get options(): CalendarOptions {
-    return {
+    const options = computed((): CalendarOptions => ({
       ...defaultCalendarOptions,
-      ...this.calendarOptions,
-    };
-  }
+      ...props.calendarOptions,
+    }));
 
-  get cssClass(): ClassNames {
-    return {
+    const cssClass = computed((): ClassNames => ({
       ...defaultClassNames,
-      ...this.classNames,
-    };
-  }
+      ...props.classNames,
+    }));
 
-  tabDaysClass(index: number): string {
-    return index + 1 === this.meetingsByDays.length
-      ? `tab__days--last ${this.cssClass.tabMeetings}`
-      : this.cssClass.tabMeetings || '';
-  }
-
-  nextMeetings(): void {
-    this.skip += this.options.limit;
-  }
-
-  previousMeetings(): void {
-    this.skip -= this.options.limit;
-  }
-
-  previousDate(): void {
-    this.$emit('previous-date');
-  }
-
-  nextDate(): void {
-    this.$emit('next-date');
-  }
-
-  meetingSlotClick(meetingSlot: MeetingSlot): void {
-    if (this.multi && Array.isArray(this.meetingSlot)) {
-      const selectedDate:number = new Date(meetingSlot.date).getTime();
-      const index:number = this.meetingSlot.findIndex((s: MeetingSlot) => {
-        const date = new Date(s.date);
-        return date.getTime() === selectedDate;
-      });
-      const slots = [...this.meetingSlot];
-      if (index !== -1) {
-        slots.splice(index, 1);
-        this.$emit('change', slots);
-        this.$emit('meeting-slot-selected', slots);
-      } else {
-        slots.push(meetingSlot);
-        this.$emit('change', slots);
-        this.$emit('meeting-slot-selected', slots);
+    const maxNbMeetings = computed((): number => {
+      if (props.meetingsDays && props.meetingsDays.length) {
+        return Math.max(...props.meetingsDays.map((meetingsDay) => meetingsDay.slots.length));
       }
-      return;
-    }
-    if (this.meetingSlot && this.meetingSlot as MeetingSlot) {
-      const selectedDate = new Date(meetingSlot.date);
-      const date = new Date(this.meetingSlot.date);
-      if (date.getTime() === selectedDate.getTime()) {
-        this.$emit('change', undefined);
-        this.$emit('meeting-slot-unselected');
+      return 0;
+    });
+
+    const meetingsByDays = computed((): MeetingsDay[] => {
+      const arrayIndex = Math.ceil(maxNbMeetings.value / options.value.limit)
+        * options.value.limit;
+      if (props.meetingsDays) {
+        return props.meetingsDays.map((meetingsDay) => {
+          const slots = new Array(arrayIndex).fill({ date: '' });
+          slots.splice(0, meetingsDay.slots.length, ...meetingsDay.slots);
+          const day = {
+            ...meetingsDay,
+            slots: slots.slice(skip.value, skip.value + options.value.limit),
+          };
+          return day;
+        });
+      }
+      return [];
+    });
+
+    const days = computed((): string[] => {
+      const { daysLabel } = options.value;
+      if (props.meetingsDays) {
+        return props.meetingsDays.map((meetingsDay) => {
+          const date = new Date(meetingsDay.date);
+          return daysLabel[date.getDay()];
+        });
+      }
+      return [];
+    });
+
+    const nextMeetings = (): void => {
+      skip.value += options.value.limit;
+    };
+
+    const previousMeetings = (): void => {
+      skip.value -= options.value.limit;
+    };
+
+    const previousDate = (): void => {
+      context.emit('previous-date');
+    };
+
+    const nextDate = (): void => {
+      context.emit('next-date');
+    };
+
+    const tabDaysClass = (index: number): string => (index + 1 === meetingsByDays.value.length
+      ? `tab__days--last ${cssClass.value.tabMeetings}`
+      : cssClass.value.tabMeetings || '');
+
+    const meetingSlotClick = (meetingSlotClicked: MeetingSlot): void => {
+      if (props.multi && Array.isArray(props.modelValue)) {
+        const selectedDate:number = new Date(meetingSlotClicked.date).getTime();
+        const index:number = props.modelValue.findIndex((s: MeetingSlot) => {
+          const date = new Date(s.date);
+          return date.getTime() === selectedDate;
+        });
+        const slots = [...props.modelValue];
+        if (index !== -1) {
+          slots.splice(index, 1);
+          context.emit('change', slots);
+          context.emit('meeting-slot-selected', slots);
+          context.emit('update:modelValue', slots);
+        } else {
+          slots.push(meetingSlotClicked);
+          context.emit('change', slots);
+          context.emit('meeting-slot-selected', slots);
+          context.emit('update:modelValue', slots);
+        }
         return;
       }
-    }
-    this.$emit('change', meetingSlot);
-    this.$emit('meeting-slot-selected', meetingSlot);
-  }
+      if (props.modelValue) {
+        const selectedDate = new Date(meetingSlotClicked.date);
+        const date = new Date((props.modelValue as MeetingSlot).date);
+        if (date.getTime() === selectedDate.getTime()) {
+          context.emit('change', undefined);
+          context.emit('meeting-slot-unselected');
+          context.emit('update:modelValue');
+          return;
+        }
+      }
+      context.emit('change', meetingSlotClicked);
+      context.emit('meeting-slot-selected', meetingSlotClicked);
+      context.emit('update:modelValue', meetingSlotClicked);
+    };
 
-  @Watch('date')
-  onDateChanged() {
-    this.skip = 0;
-  }
-}
+    return {
+      skip,
+      options,
+      cssClass,
+      tabDaysClass,
+      maxNbMeetings,
+      meetingsByDays,
+      days,
+      nextMeetings,
+      previousMeetings,
+      previousDate,
+      nextDate,
+      meetingSlotClick,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">

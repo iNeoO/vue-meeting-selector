@@ -18,67 +18,73 @@
 </template>
 
 <script lang="ts">
-import {
-  Component,
-  Prop,
-  Emit,
-  Vue,
-} from 'vue-property-decorator';
-
+import { defineComponent, PropType, computed } from 'vue';
 import MeetingSlot from '@/interfaces/MeetingSlot.interface';
 
-@Component
-export default class MeetingsDisplay extends Vue {
-  @Prop({ required: true })
-  readonly meetingSlot!: MeetingSlot;
+export default defineComponent({
+  name: 'meetingsDisplay',
+  props: {
+    meetingSlot: {
+      type: Object as PropType<MeetingSlot>,
+      required: true,
+    },
+    meetingSlotSelected: {
+      type: [Array, Object],
+    },
+    meetingButtonClass: {
+      type: String,
+      default: '',
+    },
+    meetingEmptyClass: {
+      type: String,
+      default: '',
+    },
+  },
+  emits: ['meeting-slot-click'],
+  setup(props, context) {
+    const time = computed((): string => {
+      const date = new Date((props.meetingSlotSelected as MeetingSlot).date);
+      const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+      const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+      return `${hours}:${minutes}`;
+    });
 
-  @Prop({ default: null })
-  readonly meetingSlotSelected!: MeetingSlot[] | MeetingSlot;
-
-  @Prop({ default: '' })
-  readonly meetingButtonClass!: string;
-
-  @Prop({ default: '' })
-  readonly meetingEmptyClass!: string;
-
-  get meetingClass() {
-    return {
-      [this.meetingButtonClass]: true,
-      'meeting__button--selected': this.isMeetingSelected,
-    };
-  }
-
-  get time() {
-    const date = new Date(this.meetingSlot.date);
-    const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-    const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
-    return `${hours}:${minutes}`;
-  }
-
-  get isMeetingSelected(): boolean {
-    if (Array.isArray(this.meetingSlotSelected)) {
-      const date:number = new Date(this.meetingSlot.date).getTime();
-      for (const slot of this.meetingSlotSelected) {
-        const d = new Date(slot.date);
-        if (d.getTime() === date) {
-          return true;
+    const isMeetingSelected = computed(():boolean => {
+      if (Array.isArray(props.meetingSlotSelected)) {
+        const date:number = new Date(props.meetingSlot.date).getTime();
+        for (const slot of props.meetingSlotSelected) {
+          const d = new Date((slot as MeetingSlot).date);
+          if (d.getTime() === date) {
+            return true;
+          }
         }
+        return false;
+      }
+      if (props.meetingSlotSelected && (props.meetingSlotSelected as MeetingSlot).date) {
+        const meetingSelectedDate = new Date((props.meetingSlotSelected as MeetingSlot).date);
+        const meetingDate = new Date(props.meetingSlot.date);
+        return meetingSelectedDate.getTime() === meetingDate.getTime();
       }
       return false;
-    }
-    if (this.meetingSlotSelected && this.meetingSlotSelected.date) {
-      const meetingSelectedDate = new Date(this.meetingSlotSelected.date);
-      const meetingDate = new Date(this.meetingSlot.date);
-      return meetingSelectedDate.getTime() === meetingDate.getTime();
-    }
-    return false;
-  }
+    });
 
-  @Emit()
-  meetingSlotClick() {
-    return this.meetingSlot;
-  }
-}
+    const meetingClass = computed((): {[x: string]: boolean; 'meeting__button--selected': boolean;} => ({
+      [props.meetingButtonClass]: true,
+      'meeting__button--selected': isMeetingSelected.value,
+    }));
+
+    const meetingSlotClick = (): void => {
+      context.emit('meeting-slot-click', props.meetingSlot);
+    };
+
+    return {
+      meetingClass,
+      time,
+      meetingSlotClick,
+    };
+  },
+});
+
 </script>
 
 <style scoped lang="scss">
