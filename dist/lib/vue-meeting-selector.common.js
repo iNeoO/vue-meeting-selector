@@ -511,6 +511,20 @@ module.exports = function (options, source) {
 
 /***/ }),
 
+/***/ "23f6":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".meeting[data-v-4869c393]{margin-left:auto;margin-right:auto}.meeting__button[data-v-4869c393]{background-color:#dff1ff;color:#131516;border-radius:3px;cursor:pointer;border:none;font-weight:700;margin:5px 0;padding:10px;padding:10px 12px;font-size:16px}.meeting__button--selected[data-v-4869c393],.meeting__button[data-v-4869c393]:hover{background-color:#b0d7f4}.meeting__button[data-v-4869c393]:focus{outline:none}.meeting__button[data-v-4869c393]:disabled:hover{background-color:#dff1ff}.meeting__empty[data-v-4869c393]{font-size:18px;margin:5px 0;border-radius:3px;padding:10px 12px;font-weight:700;color:#c0c4cc}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
 /***/ "241c":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1370,6 +1384,21 @@ module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
 
 /***/ }),
 
+/***/ "597a":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("23f6");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("d70b20ee", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
 /***/ "59cf":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2172,6 +2201,17 @@ var update = add("ec094720", content, true, {"sourceMap":false,"shadowMode":fals
 
 /***/ }),
 
+/***/ "98c8":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_MeetingDisplay_vue_vue_type_style_index_0_id_4869c393_scoped_true_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("597a");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_MeetingDisplay_vue_vue_type_style_index_0_id_4869c393_scoped_true_lang_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_MeetingDisplay_vue_vue_type_style_index_0_id_4869c393_scoped_true_lang_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ 
+
+/***/ }),
+
 /***/ "99af":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2796,17 +2836,6 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ "ae10":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_MeetingDisplay_vue_vue_type_style_index_0_id_f65b001c_scoped_true_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b74f");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_MeetingDisplay_vue_vue_type_style_index_0_id_f65b001c_scoped_true_lang_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_MeetingDisplay_vue_vue_type_style_index_0_id_f65b001c_scoped_true_lang_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- 
-
-/***/ }),
-
 /***/ "ae40":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3045,35 +3074,6 @@ module.exports = {
   // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
   findIndex: createMethod(6)
 };
-
-
-/***/ }),
-
-/***/ "b74f":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("bd34");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("7b7b9fb2", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
-/***/ "bd34":
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".meeting[data-v-f65b001c]{margin-left:auto;margin-right:auto}.meeting__button[data-v-f65b001c]{background-color:#dff1ff;color:#131516;border-radius:3px;cursor:pointer;border:none;font-weight:700;margin:5px 0;padding:10px;padding:10px 12px;font-size:16px}.meeting__button--selected[data-v-f65b001c],.meeting__button[data-v-f65b001c]:hover{background-color:#b0d7f4}.meeting__button[data-v-f65b001c]:focus{outline:none}.meeting__button[data-v-f65b001c]:disabled:hover{background-color:#dff1ff}.meeting__empty[data-v-f65b001c]{font-size:18px;margin:5px 0;border-radius:3px;padding:10px 12px;font-weight:700;color:#c0c4cc}", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
@@ -4274,31 +4274,31 @@ function Meetingsvue_type_template_id_aadd1512_scoped_true_bindings_render(_ctx,
 }
 // CONCATENATED MODULE: ./src/components/MeetingSelector/Meetings.vue?vue&type=template&id=aadd1512&scoped=true&bindings={}
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/MeetingSelector/MeetingDisplay.vue?vue&type=template&id=f65b001c&scoped=true&bindings={}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/MeetingSelector/MeetingDisplay.vue?vue&type=template&id=4869c393&scoped=true&bindings={}
 
 
-var MeetingDisplayvue_type_template_id_f65b001c_scoped_true_bindings_withScopeId = function _withScopeId(n) {
-  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["pushScopeId"])("data-v-f65b001c"), n = n(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["popScopeId"])(), n;
+var MeetingDisplayvue_type_template_id_4869c393_scoped_true_bindings_withScopeId = function _withScopeId(n) {
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["pushScopeId"])("data-v-4869c393"), n = n(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["popScopeId"])(), n;
 };
 
-var MeetingDisplayvue_type_template_id_f65b001c_scoped_true_bindings_hoisted_1 = {
+var MeetingDisplayvue_type_template_id_4869c393_scoped_true_bindings_hoisted_1 = {
   class: "meeting"
 };
-var MeetingDisplayvue_type_template_id_f65b001c_scoped_true_bindings_hoisted_2 = ["disabled"];
-function MeetingDisplayvue_type_template_id_f65b001c_scoped_true_bindings_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", MeetingDisplayvue_type_template_id_f65b001c_scoped_true_bindings_hoisted_1, [_ctx.meetingSlot.date ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("button", {
+var MeetingDisplayvue_type_template_id_4869c393_scoped_true_bindings_hoisted_2 = ["disabled"];
+function MeetingDisplayvue_type_template_id_4869c393_scoped_true_bindings_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", MeetingDisplayvue_type_template_id_4869c393_scoped_true_bindings_hoisted_1, [_ctx.meetingSlot.date ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("button", {
     key: 0,
     class: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["normalizeClass"])(["meeting__button", _ctx.meetingClass]),
     disabled: !_ctx.meetingSlot.date,
     onClick: _cache[0] || (_cache[0] = function () {
       return _ctx.meetingSlotClick && _ctx.meetingSlotClick.apply(_ctx, arguments);
     })
-  }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.time), 11, MeetingDisplayvue_type_template_id_f65b001c_scoped_true_bindings_hoisted_2)) : (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", {
+  }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.time), 11, MeetingDisplayvue_type_template_id_4869c393_scoped_true_bindings_hoisted_2)) : (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", {
     key: 1,
     class: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["normalizeClass"])(["meeting__empty", _ctx.meetingEmptyClass])
   }, " — ", 2))]);
 }
-// CONCATENATED MODULE: ./src/components/MeetingSelector/MeetingDisplay.vue?vue&type=template&id=f65b001c&scoped=true&bindings={}
+// CONCATENATED MODULE: ./src/components/MeetingSelector/MeetingDisplay.vue?vue&type=template&id=4869c393&scoped=true&bindings={}
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
 
@@ -4392,7 +4392,7 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
   emits: ['meeting-slot-click'],
   setup: function setup(props, context) {
     var time = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["computed"])(function () {
-      var date = new Date(props.meetingSlotSelected.date);
+      var date = new Date(props.meetingSlot.date);
       var hours = date.getHours() < 10 ? "0".concat(date.getHours()) : date.getHours();
       var minutes = date.getMinutes() < 10 ? "0".concat(date.getMinutes()) : date.getMinutes();
       return "".concat(hours, ":").concat(minutes);
@@ -4449,8 +4449,8 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
 }));
 // CONCATENATED MODULE: ./src/components/MeetingSelector/MeetingDisplay.vue?vue&type=script&lang=ts
  
-// EXTERNAL MODULE: ./src/components/MeetingSelector/MeetingDisplay.vue?vue&type=style&index=0&id=f65b001c&scoped=true&lang=scss
-var MeetingDisplayvue_type_style_index_0_id_f65b001c_scoped_true_lang_scss = __webpack_require__("ae10");
+// EXTERNAL MODULE: ./src/components/MeetingSelector/MeetingDisplay.vue?vue&type=style&index=0&id=4869c393&scoped=true&lang=scss
+var MeetingDisplayvue_type_style_index_0_id_4869c393_scoped_true_lang_scss = __webpack_require__("98c8");
 
 // CONCATENATED MODULE: ./src/components/MeetingSelector/MeetingDisplay.vue
 
@@ -4458,8 +4458,8 @@ var MeetingDisplayvue_type_style_index_0_id_f65b001c_scoped_true_lang_scss = __w
 
 
 
-MeetingDisplayvue_type_script_lang_ts.render = MeetingDisplayvue_type_template_id_f65b001c_scoped_true_bindings_render
-MeetingDisplayvue_type_script_lang_ts.__scopeId = "data-v-f65b001c"
+MeetingDisplayvue_type_script_lang_ts.render = MeetingDisplayvue_type_template_id_4869c393_scoped_true_bindings_render
+MeetingDisplayvue_type_script_lang_ts.__scopeId = "data-v-4869c393"
 
 /* harmony default export */ var MeetingDisplay = (MeetingDisplayvue_type_script_lang_ts);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/MeetingSelector/Meetings.vue?vue&type=script&lang=ts

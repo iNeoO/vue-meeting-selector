@@ -43,7 +43,7 @@ export default defineComponent({
   emits: ['meeting-slot-click'],
   setup(props, context) {
     const time = computed((): string => {
-      const date = new Date((props.meetingSlotSelected as MeetingSlot).date);
+      const date = new Date(props.meetingSlot.date);
       const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
       const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
       return `${hours}:${minutes}`;
