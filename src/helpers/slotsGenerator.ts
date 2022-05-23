@@ -1,6 +1,6 @@
-import MeetingsDay from '@/interfaces/MeetingsDay.interface';
-import MeetingSlot from '@/interfaces/MeetingSlot.interface';
-import Time from '@/interfaces/Time.interface';
+import MeetingsDay from '../interfaces/MeetingsDay.interface';
+import MeetingSlot from '../interfaces/MeetingSlot.interface';
+import Time from '../interfaces/Time.interface';
 
 function formatingDate(date: Date | string):string {
   const d = new Date(date);
@@ -33,14 +33,14 @@ function roundToClosestTime(date: Date, interval: number): Date {
   return d;
 }
 
-function roundDate(date: Date): Date {
-  const tz = -date.getTimezoneOffset();
-  const time: Time = {
-    hours: Math.floor(tz / 60),
-    minutes: tz % 60,
-  };
-  return setTime(date, time);
-}
+// function roundDate(date: Date): Date {
+//   const tz = -date.getTimezoneOffset();
+//   const time: Time = {
+//     hours: Math.floor(tz / 60),
+//     minutes: tz % 60,
+//   };
+//   return setTime(date, time);
+// }
 
 function generateSlots(
   start: Date,
@@ -79,7 +79,7 @@ function generateFirstDate(
   const end: Date = setTime(date, endTime);
   const slots: MeetingSlot[] = generateSlots(start, end, interval);
   return {
-    date: roundDate(date),
+    date,
     slots,
   };
 }
@@ -110,7 +110,7 @@ function generateDays(
         randomSlotsToDelete,
       );
       const meetingsDay: MeetingsDay = {
-        date: roundDate(startingDay),
+        date: startingDay,
         slots,
       };
       days.push(meetingsDay);
