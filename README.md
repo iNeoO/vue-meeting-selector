@@ -9,7 +9,7 @@ This component is inspired from the meeting selector from [doctolib](https://www
 
 
 ## Dependencies
-- required: Vuejs >= 2.6.x
+- required: Vuejs >= 3.x
 
 ## Install
 ```bash

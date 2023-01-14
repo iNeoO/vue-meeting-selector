@@ -1,7 +1,19 @@
 {
   "name": "vue-meeting-selector",
-  "version": "1.1.3",
+  "version": "3.0.0",
   "author": "Valère Pique <pique.valere@gmx.fr>",
+  "main": "./dist/lib/vue-meeting-selector.umd.js",
+  "module": "./dist/vue-meeting-selector.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/vue-meeting-selector.mjs",
+      "require": "./dist/vue-meeting-selector.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
   "keywords": [
     "vue",
     "vuejs",
@@ -10,54 +22,45 @@
     "selector",
     "web-components"
   ],
-  "main": "dist/lib/vue-meeting-selector.common.js",
   "private": false,
   "license": "MIT",
   "scripts": {
-    "dev": "vue-cli-service serve src/dev.ts",
-    "doc": "vue-cli-service serve src/doc.ts",
-    "build:lib": "vue-cli-service build --target lib --dest dist/lib --name vue-meeting-selector src/lib.ts",
-    "build:doc": "vue-cli-service build src/doc.ts --dest dist/doc",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vue-tsc --declaration --emitDeclarationOnly && vite build",
+    "preview": "vite preview",
+    "test:unit": "vitest --environment jsdom --root src/",
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "vue": "^2.6.10"
+    "vue": "^3.2.41"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.26",
-    "@fortawesome/free-brands-svg-icons": "^5.12.0",
-    "@fortawesome/free-solid-svg-icons": "^5.12.0",
-    "@fortawesome/vue-fontawesome": "^0.1.9",
-    "@types/highlight.js": "^9.12.3",
-    "@types/jest": "^24.0.19",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
-    "@vue/cli-plugin-babel": "^4.5.0",
-    "@vue/cli-plugin-eslint": "^4.5.0",
-    "@vue/cli-plugin-typescript": "^4.5.0",
-    "@vue/cli-plugin-unit-jest": "^4.5.0",
-    "@vue/cli-service": "^4.5.0",
-    "@vue/eslint-config-airbnb": "^4.0.0",
-    "@vue/eslint-config-typescript": "^4.0.0",
-    "@vue/test-utils": "1.0.0-beta.29",
-    "cirrus-ui": "^0.5.5",
-    "core-js": "^3.4.4",
-    "coveralls": "^3.0.9",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "highlight.js": "^9.18.0",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.0",
-    "typescript": "~3.5.3",
-    "vue-class-component": "^7.0.2",
-    "vue-highlight.js": "^3.1.0",
-    "vue-property-decorator": "^8.3.0",
-    "vue-template-compiler": "^2.6.10",
-    "vuex": "^3.1.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/IneoO/vue-meeting-selector.git"
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/vue-fontawesome": "^3.0.2",
+    "@highlightjs/vue-plugin": "^2.1.0",
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@types/jsdom": "^20.0.0",
+    "@types/node": "^16.18.11",
+    "@vitejs/plugin-vue": "^3.1.2",
+    "@vue/eslint-config-airbnb": "^7.0.0",
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "@vue/test-utils": "^2.1.0",
+    "@vue/tsconfig": "^0.1.3",
+    "cirrus-ui": "^0.7.1",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "highlight.js": "^11.6.0",
+    "jsdom": "^20.0.1",
+    "npm-run-all": "^4.1.5",
+    "pinia": "^2.0.23",
+    "prettier": "^2.7.1",
+    "typescript": "~4.7.4",
+    "vite": "^3.1.8",
+    "vitest": "^0.24.3",
+    "vue-tsc": "^1.0.9"
   }
 }

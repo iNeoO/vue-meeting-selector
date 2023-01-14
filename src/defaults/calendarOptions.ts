@@ -1,4 +1,4 @@
-import CalendarOptions from '@/interfaces/CalendarOptions.interface';
+import type CalendarOptions from '@/interfaces/CalendarOptions.interface';
 
 const days: string[] = [
   'sunday',

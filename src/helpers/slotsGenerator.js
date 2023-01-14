@@ -62,14 +62,14 @@ function roundToClosestTime(date, interval) {
  * Round a date with tz
  * @param {Date} date - date used to disable
  */
-function roundDate(date) {
-  const tz = -date.getTimezoneOffset();
-  const time = {
-    hours: Math.floor(tz / 60),
-    minutes: tz % 60,
-  };
-  return setTime(date, time);
-}
+// function roundDate(date) {
+//   const tz = -date.getTimezoneOffset();
+//   const time = {
+//     hours: Math.floor(tz / 60),
+//     minutes: tz % 60,
+//   };
+//   return setTime(date, time);
+// }
 
 /**
  * Function to generate the first slot of the week used
@@ -118,7 +118,7 @@ function generateFirstDate(date, interval, startTime, endTime) {
   const end = setTime(date, endTime);
   const slots = generateSlots(start, end, interval);
   return {
-    date: roundDate(date),
+    date,
     slots,
   };
 }
@@ -139,7 +139,8 @@ function generateDays(date, nbDays, startTime, endTime, interval, randomSlotsToD
   // Set to second Day
   const startingDay = new Date(date);
   for (let i = 1; i < nbDays; i += 1) {
-    const slotsDate = new Date(startingDay.setDate(startingDay.getDate() + 1));
+    startingDay.setDate(startingDay.getDate() + 1);
+    const slotsDate = new Date(startingDay);
     /**
      * Use this to not display sunday and saturday
      * if (slotsDate.getDay() === 0 || slotsDate.getDay() === 6) {
@@ -155,7 +156,7 @@ function generateDays(date, nbDays, startTime, endTime, interval, randomSlotsToD
       randomSlotsToDelete,
     );
     const meetingsDay = {
-      date: roundDate(startingDay),
+      date: new Date(startingDay),
       slots,
     };
     days.push(meetingsDay);
