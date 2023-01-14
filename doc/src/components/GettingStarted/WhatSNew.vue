@@ -6,6 +6,8 @@
     </h3>
     <ul>
       <li>
+        <h6>3.0.0</h6>
+        <p>Upgrade to vue3, build with vite (need to update readme)</p>
         <h6>1.1.0</h6>
         <p>Set possible to have multi meetings selected</p>
       </li>
