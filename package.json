@@ -1,6 +1,6 @@
 {
   "name": "vue-meeting-selector",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "Valère Pique <pique.valere@gmx.fr>",
   "main": "./dist/lib/vue-meeting-selector.umd.js",
   "module": "./dist/vue-meeting-selector.mjs",
@@ -12,7 +12,14 @@
       "import": "./dist/vue-meeting-selector.mjs",
       "require": "./dist/vue-meeting-selector.umd.js"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./dist/style.css": "./dist/style.css",
+    "./src/helpers/slotsGenerator.js": "./src/helpers/slotsGenerator.js",
+    "./src/helpers/slotsGenerator.ts": "./src/helpers/slotsGenerator.ts",
+    "./src/interfaces/CalendarOptions.interface.ts": "./src/interfaces/CalendarOptions.interface.ts",
+    "./src/interfaces/ClassNames.interface.ts": "./src/interfaces/ClassNames.interface.ts",
+    "./src/interfaces/MeetingsDay.interface.ts": "./src/interfaces/MeetingsDay.interface.ts",
+    "./src/interfaces/MeetingSlot.interface.ts": "./src/interfaces/MeetingSlot.interface.ts",
+    "./src/interfaces/Time.interface.ts": "./src/interfaces/Time.interface.ts"
   },
   "keywords": [
     "vue",
