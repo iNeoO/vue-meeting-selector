@@ -86,6 +86,7 @@ import {
 } from 'vue';
 
 import VueMeetingSelector from 'vue-meeting-selector';
+import 'vue-meeting-selector/dist/style.css';
 // Function used to generate slots, use your own function
 import slotsGenerator from 'vue-meeting-selector/src/helpers/slotsGenerator';
 
