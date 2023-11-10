@@ -1,6 +1,6 @@
 {
   "name": "vue-meeting-selector",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": "Valère Pique <pique.valere@gmx.fr>",
   "main": "./dist/lib/vue-meeting-selector.umd.js",
   "module": "./dist/vue-meeting-selector.mjs",
