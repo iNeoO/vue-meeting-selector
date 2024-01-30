@@ -20,6 +20,8 @@ yarn add vue-meeting-selector
 Include the file in your app
 ```javascript
 import VueMeetingSelector from 'vue-meeting-selector';
+import "vue-meeting-selector/dist/style.css";
+import slotsGenerator from "vue-meeting-selector/src/helpers/slotsGenerator";
 ```
 
 ## Contributing
@@ -32,56 +34,137 @@ When you create a new PR please make it against the develop branch when adding n
 ```html
 <template>
   <vue-meeting-selector
+    ref="meetingSelector"
+    class="meeting-selector"
     v-model="meeting"
     :date="date"
-    :loading="loading"
+    :loading="false"
+    multi
     :meetings-days="meetingsDays"
     @next-date="nextDate"
-    @previous-date="previousDate" />
+    @previous-date="previousDate"
+    @update:modelValue="change"
+  />
 </template>
 
 <script>
-import VueMeetingSelector from 'vueMeetingSelector';
+import { defineComponent, ref } from "vue";
+import VueMeetingSelector from "vue-meeting-selector";
+import "vue-meeting-selector/dist/style.css";
+import slotsGenerator from "vue-meeting-selector/src/helpers/slotsGenerator";
 
-export default {
+export default defineComponent({
   components: {
     VueMeetingSelector,
   },
-  data() {
+  setup() {
+    const meeting = ref([]);
+    const meetingsDays = ref([]);
+    const nbDaysToDisplay = ref(5);
+    const date = ref(new Date());
+
+    const initMeetingsDays = () => {
+      const start = {
+        hours: 8,
+        minutes: 0,
+      };
+      const end = {
+        hours: 16,
+        minutes: 0,
+      };
+      meetingsDays.value = slotsGenerator(
+        new Date(),
+        nbDaysToDisplay.value,
+        start,
+        end,
+        30
+      );
+    };
+
+    initMeetingsDays();
+
+    const meetingSelector = ref(null);
+
+    const up = () => meetingSelector.value.previousMeetings();
+
+    const down = () => meetingSelector.value.nextMeetings();
+
+    const nextDate = () => {
+      const start = {
+        hours: 8,
+        minutes: 0,
+      };
+      const end = {
+        hours: 16,
+        minutes: 0,
+      };
+      const d = new Date(date.value);
+      const newDate = new Date(d.setDate(d.getDate() + 7));
+      date.value = newDate;
+      meetingsDays.value = slotsGenerator(
+        newDate,
+        nbDaysToDisplay.value,
+        start,
+        end,
+        30
+      );
+    };
+
+    const previousDate = () => {
+      const start = {
+        hours: 8,
+        minutes: 0,
+      };
+      const end = {
+        hours: 16,
+        minutes: 0,
+      };
+      const d = new Date(date.value);
+      d.setDate(d.getDate() - 7);
+      const formatingDate = (dateToFormat) => {
+        const dateParsed = new Date(dateToFormat);
+        const day =
+          dateParsed.getDate() < 10
+            ? `0${dateParsed.getDate()}`
+            : dateParsed.getDate();
+        const month =
+          dateParsed.getMonth() + 1 < 10
+            ? `0${dateParsed.getMonth() + 1}`
+            : dateParsed.getMonth() + 1;
+        const year = dateParsed.getFullYear();
+        return `${year}-${month}-${day}`;
+      };
+      const newDate =
+        formatingDate(new Date()) >= formatingDate(d)
+          ? new Date()
+          : new Date(d);
+      date.value = newDate;
+      meetingsDays.value = slotsGenerator(
+        newDate,
+        nbDaysToDisplay.value,
+        start,
+        end,
+        30
+      );
+    };
+
+    const change = () => {
+      console.log(meeting.value);
+    };
+
     return {
-      date: new Date('2020-01-01:01:00'),
-      meeting: null,
-      loading: false,
-      meetingsDays: [],
+      meeting,
+      meetingsDays,
+      date,
+      meetingSelector,
+      up,
+      down,
+      nextDate,
+      previousDate,
+      change,
     };
   },
-  methods: {
-    getMeetings(date) {
-      // methods who return the meetings
-    },
-    async nextDate() {
-      this.loading = true;
-      const date = new Date(this.date);
-      date.setDate(date.getDate() + 7);
-      this.meetingsDays = await this.getMeetings(date);
-      this.date = date;
-      this.loading = false;
-    },
-    async previousDate() {
-      this.loading = true;
-      const date = new Date(this.date);
-      date.setDate(date.getDate() - 7);
-      this.meetingsDays = await this.getMeetings(date);
-      this.date = date;
-      this.loading = false;
-    },
-  },
-  async created() {
-    this.loading = true;
-    this.meetingsDays = await this.getMeetings(this.date);
-    this.loading = false;
-  },
-};
+});
 </script>
 ```
 
@@ -118,6 +201,7 @@ interface CalendarOptions {
   daysLabel: string[]; // Labels for days in title, start by sunday
   monthsLabel: string[]; // labels for months in title, start by january
   limit: number, // max nb meetings to display on a same column
+  spacing: number, // When clicking next, how many cells do you want to scroll
   loadingLabel: string; // label to display when loading
   disabledDate: Function; // function to disable left button (date is passed as params)
 }
