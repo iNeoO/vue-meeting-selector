@@ -1,4 +1,4 @@
-import type CalendarOptions from '@/interfaces/CalendarOptions.interface';
+import type { RequiredCalendarOptions } from '@/interfaces/CalendarOptions.interface';
 
 const days: string[] = [
   'sunday',
@@ -37,10 +37,11 @@ const disabledDate = (date: Date | string): boolean => {
   return decomposeDate(actualDate) <= decomposeDate(today);
 };
 
-const defaultCalendarOptions: CalendarOptions = {
+const defaultCalendarOptions: RequiredCalendarOptions = {
   daysLabel: days,
   monthsLabel: months,
   limit: 4,
+  spacing: 4,
   loadingLabel: 'Loading ...',
   disabledDate,
 };

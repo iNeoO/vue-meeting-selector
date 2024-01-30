@@ -73,12 +73,12 @@
         </slot>
         <slot
           name="button-down"
-          :is-disabled="skip + options.limit >= maxNbMeetings || loading"
+          :is-disabled="skip + options.spacing >= maxNbMeetings || loading"
         >
           <button
             type="button"
             :class="cssClass.tabPaginationDownButton"
-            :disabled="skip + options.limit >= maxNbMeetings || loading"
+            :disabled="skip + options.spacing >= maxNbMeetings || loading"
             @click="nextMeetings"
             class="tab__pagination__button tab__pagination__button--down">
             <arrow-icon direction="down" />
@@ -102,7 +102,7 @@ import Loader from './Loader.vue';
 
 import type MeetingsDay from '../interfaces/MeetingsDay.interface';
 import type MeetingSlot from '../interfaces/MeetingSlot.interface';
-import type CalendarOptions from '../interfaces/CalendarOptions.interface';
+import type { RequiredCalendarOptions, CalendarOptions } from '../interfaces/CalendarOptions.interface';
 import type ClassNames from '../interfaces/ClassNames.interface';
 
 import defaultCalendarOptions from '../defaults/calendarOptions';
@@ -157,7 +157,7 @@ export default defineComponent({
   setup(props, context) {
     const skip = ref(0);
 
-    const options = computed((): CalendarOptions => ({
+    const options = computed((): RequiredCalendarOptions => ({
       ...defaultCalendarOptions,
       ...props.calendarOptions,
     }));
@@ -203,11 +203,11 @@ export default defineComponent({
     });
 
     const nextMeetings = (): void => {
-      skip.value += options.value.limit;
+      skip.value += options.value.spacing;
     };
 
     const previousMeetings = (): void => {
-      skip.value -= options.value.limit;
+      skip.value -= options.value.spacing;
     };
 
     const previousDate = (): void => {

@@ -2,6 +2,7 @@ export const calendarOptions = `interface CalendarOptions {
   daysLabel: string[]; // Labels for days in title, start by sunday
   monthsLabel: string[]; // labels for months in title, start by january
   limit: number, // max nb meetings to display on a same column
+  spacing: number, // When clicking next, how many cells do you want to scroll
   loadingLabel: string; // label to display when loading
   disabledDate: Function; // function to disable left button (date is passed as params)
 }`;

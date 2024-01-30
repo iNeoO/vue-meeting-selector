@@ -1,10 +1,15 @@
-interface CalendarOptions {
-  daysLabel: string[];
-  monthsLabel: string[];
-  limit: number,
-  loadingLabel: string;
+export interface CalendarOptions {
+  daysLabel?: string[];
+  monthsLabel?: string[];
+  limit?: number,
+  spacing?: number,
+  loadingLabel?: string;
   // eslint-disable-next-line no-unused-vars
-  disabledDate:(date: string | Date) => boolean;
+  disabledDate?:(date: string | Date) => boolean;
 }
 
-export default CalendarOptions;
+type Required<T> = {
+  [P in keyof T]-?: T[P]
+}
+
+export type RequiredCalendarOptions = Required<CalendarOptions>;
